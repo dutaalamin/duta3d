@@ -1,9 +1,9 @@
 <template>
-  <div class="about">about</div>
+  <div class="projects">projects</div>
 </template>
 
 <style scoped lang="scss">
-.about {
+.projects {
   min-height: var(--100vh);
 }
 </style>
