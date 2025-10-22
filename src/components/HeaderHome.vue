@@ -1,59 +1,56 @@
 <script setup lang="ts">
-import Button from "./Button.vue";
-import Logo from "./Logo.vue";
+import HeaderLink from "./HeaderLink.vue";
 import { computed } from "vue";
 import { useTranslationContext } from "../i18n/context";
+
 import { lenis } from "../utils/scroll";
 import { useHeaderTheme } from "../composables/useHeaderTheme";
 
 const { t } = useTranslationContext();
 const { isDarkTheme } = useHeaderTheme();
 
-const handleLogoClick = () => {
-  lenis.scrollTo(0);
+const handleLinkClick = (link: string) => {
+  lenis.scrollTo(link);
 };
 
 const classNames = computed(() => {
   return {
-    header: true,
-    "header-dark": isDarkTheme.value,
+    "header-links": true,
+    "header-links-dark": isDarkTheme.value,
   };
 });
 </script>
 
 <template>
   <header :class="classNames">
-    <Logo class="header-logo" @click="handleLogoClick" />
-    <Button>{{ t("get-in-touch") }}</Button>
+    <HeaderLink @click="handleLinkClick('.about')">{{ t("about") }}</HeaderLink>
+    <HeaderLink @click="handleLinkClick('.projects')">{{ t("projects") }}</HeaderLink>
+    <HeaderLink @click="handleLinkClick('.contact')">{{ t("contact") }}</HeaderLink>
   </header>
 </template>
 
 <style scoped lang="scss">
-.header {
+.header-links {
   position: fixed;
   top: var(--space-outer);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   left: 50%;
+  gap: var(--space-xxxl);
   transform: translateX(-50%);
   width: var(--breakpoint-xxl);
   max-width: calc(100% - var(--space-outer) * 2);
   z-index: var(--z-index-header);
+  display: none;
   height: var(--height-header);
+
+  @include mixins.mq("md") {
+    display: flex;
+  }
 
   &-dark {
     color: var(--color-white-400);
-  }
-
-  &-logo {
-    transition: color 0.2s ease-in-out;
-    width: 42px;
-    cursor: pointer;
-
-    @include mixins.mq("md") {
-      width: 48px;
-    }
   }
 }
 </style>
