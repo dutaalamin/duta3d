@@ -2,15 +2,7 @@
 #include ../includes/avatar-progress/vertex.glsl;
 
 varying vec3 vNormal;
-varying vec3 vWorldPos;
-varying vec3 vPosition;
-
-uniform float uTime;
-uniform float uProgress;
-
-float random2D(vec2 value) {
-    return fract(sin(dot(value.xy, vec2(12.9898,78.233))) * 43758.5453123);
-}
+varying vec3 vViewPosition;
 
 void main() {
     #include <skinbase_vertex>
@@ -21,16 +13,15 @@ void main() {
 
     vec4 worldPosition = modelMatrix * vec4(transformed, 1.0);
 
-    // Normal skinning
     vec4 skinnedNormal = vec4(0.0);
     skinnedNormal += boneMatX * vec4(normal, 0.0) * skinWeight.x;
     skinnedNormal += boneMatY * vec4(normal, 0.0) * skinWeight.y;
     skinnedNormal += boneMatZ * vec4(normal, 0.0) * skinWeight.z;
     skinnedNormal += boneMatW * vec4(normal, 0.0) * skinWeight.w;
-    vNormal = skinnedNormal.xyz;
 
-    vWorldPos = worldPosition.xyz;
-    vPosition = transformed;
+    vec4 viewPosition = modelViewMatrix * vec4(position, 1.0);
+    vViewPosition = viewPosition.xyz;
+    vNormal = skinnedNormal.xyz;
 
     vModelProgress = getModelProgress(transformed, worldPosition.y);
 }
