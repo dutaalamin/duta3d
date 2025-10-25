@@ -1,21 +1,21 @@
 import { resources } from "../../../utils/resources";
-import { room } from ".";
+import { contact } from ".";
 import { getShadowMaterial } from "../../common/materials";
 import { colors } from "../../common/colors";
 import { Color } from "three";
 
 import type { Object3D } from "three";
 
-const backgroundColor = colors.beigeLight.clone().convertLinearToSRGB();
-const shadowColor = new Color("rgb(215, 194, 169)");
+const backgroundColor = colors.beigeDark.clone().convertLinearToSRGB();
+const shadowColor = new Color("rgb(208, 185, 156)");
 
 const init = () => {
   initObjects();
 };
 
 const initObjects = () => {
-  const resource = resources.items["room-model"];
-  const texture = resources.items["room-shadow-texture"];
+  const resource = resources.items["contact-model"];
+  const texture = resources.items["contact-shadow-texture"];
   texture.flipY = false;
 
   const mesh = resource.scene.children.find((child: Object3D) => child.name === "shadow-catcher");
@@ -30,7 +30,7 @@ const initObjects = () => {
 
   mesh.renderOrder = -1000;
 
-  room.group.add(mesh);
+  contact.group.add(mesh);
 };
 
 const destroy = () => {};
