@@ -81,7 +81,7 @@ const showAttribution = import.meta.env.VITE_SHOW_ATTRIBUTION !== "false";
               external
               data-cursor="circle-white"
               data-hoversound="hover"
-              >David Heckhoff</Link
+              >Duta Alamin</Link
             >
           </Clickable>
         </div>
@@ -100,7 +100,7 @@ const showAttribution = import.meta.env.VITE_SHOW_ATTRIBUTION !== "false";
             >
           </Clickable>
         </div>
-        <p>© {{ new Date().getFullYear() }} David Heckhoff</p>
+        <p>© {{ new Date().getFullYear() }} Duta Alamin</p>
       </div>
     </div>
   </footer>

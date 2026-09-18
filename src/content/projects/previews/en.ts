@@ -1,40 +1,40 @@
-import thumbnailCubeWar from "../../../assets/thumbnails/cubewar.webp";
-import thumbnailQuibbo from "../../../assets/thumbnails/quibbo.webp";
-import thumbnailParticles from "../../../assets/thumbnails/particles.webp";
-import thumbnailPokedex from "../../../assets/thumbnails/pokedex.webp";
-import thumbnailSharkie from "../../../assets/thumbnails/sharkie.webp";
+import thumbnailQuran from "../../../assets/thumbnails/dquran.png";
+import thumbnailWave from "../../../assets/thumbnails/wave.png";
+import thumbnailRubic from "../../../assets/thumbnails/rubic.png";
+import thumbnailBravo from "../../../assets/thumbnails/bravo.png";
+import thumbnailDraken from "../../../assets/thumbnails/draken.png";
 
 import type { ProjectPreview } from "../../types";
 
 export default [
   {
-    title: "CubeWar",
-    slug: "cubewar",
-    thumbnail: thumbnailCubeWar,
-    description: "Multiplayer strategy game",
+    title: "Quran",
+    slug: "quran",
+    thumbnail: thumbnailQuran,
+    description: "Al-Quran Digital Platform",
   },
   {
-    title: "Quibbo",
-    slug: "quibbo",
-    thumbnail: thumbnailQuibbo,
-    description: "Multiplayer gaming platform",
+    title: "Wave",
+    slug: "wave",
+    thumbnail: thumbnailWave,
+    description: "Digital Platform",
   },
   {
-    title: "Sharkie",
-    slug: "sharkie",
-    thumbnail: thumbnailSharkie,
-    description: "2D adventure game",
+    title: "Rubic",
+    slug: "rubic",
+    thumbnail: thumbnailRubic,
+    description: "Digital Platform",
   },
   {
-    title: "WebGL Particles",
-    slug: "particles",
-    thumbnail: thumbnailParticles,
-    description: "Dynamic 3D particles",
+    title: "Bravo",
+    slug: "bravo",
+    thumbnail: thumbnailBravo,
+    description: "AI-powered marketing platform",
   },
   {
-    title: "Pokédex",
-    slug: "pokedex",
-    thumbnail: thumbnailPokedex,
-    description: "Open-source learning project",
+    title: "Draken",
+    slug: "draken",
+    thumbnail: thumbnailDraken,
+    description: "Software and tools service platform",
   },
 ] as const satisfies ProjectPreview[];
