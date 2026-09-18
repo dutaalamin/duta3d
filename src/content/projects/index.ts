@@ -12,12 +12,10 @@ function simplifyModules(glob: Record<string, any>) {
 }
 
 export const projectModules = {
-  de: simplifyModules(import.meta.glob("./de/*.ts", { eager: true })),
   en: simplifyModules(import.meta.glob("./en/*.ts", { eager: true })),
 } as const satisfies Record<Locale, Record<string, any>>;
 
 export const previews = {
   en: () => import("./previews/en"),
-  de: () => import("./previews/de"),
 } as const;
 

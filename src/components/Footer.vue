@@ -2,10 +2,8 @@
 import Social from "./Social.vue";
 import Link from "./Link.vue";
 import Clickable from "./Clickable.vue";
-import LangSwitch from "./LangSwitch.vue";
 import NotchSection from "./NotchSection.vue";
 import { t } from "../i18n/utils/translate";
-import { locale } from "../i18n/store";
 import ButtonRound from "./ButtonRound.vue";
 import { lenis } from "../composables/useScroll";
 import ArrowRightLong from "./icons/ArrowRightLong.vue";
@@ -45,7 +43,7 @@ const showAttribution = import.meta.env.VITE_SHOW_ATTRIBUTION !== "false";
           <div class="footer-top-links-legal">
             <Clickable renderAs="div">
               <Link
-                :href="locale === 'de' ? '/de/privacy' : '/privacy'"
+                href="/privacy"
                 class="footer-link"
                 :external="true"
                 data-cursor="circle-white"
@@ -56,7 +54,7 @@ const showAttribution = import.meta.env.VITE_SHOW_ATTRIBUTION !== "false";
             </Clickable>
             <Clickable renderAs="div">
               <Link
-                :href="locale === 'de' ? '/de/legal' : '/legal'"
+                href="/legal"
                 class="footer-link children-unclickable"
                 :external="true"
                 data-cursor="circle-white"
@@ -66,7 +64,6 @@ const showAttribution = import.meta.env.VITE_SHOW_ATTRIBUTION !== "false";
               >
             </Clickable>
           </div>
-          <LangSwitch />
         </div>
       </div>
       <div class="footer-credits">
