@@ -21,20 +21,23 @@ const { withSocial = true } = defineProps<Props>();
   <footer class="footer">
     <NotchSection class="footer-notch" />
     <div class="footer-content">
-      <div
-        class="footer-back-to-top"
-        tabindex="0"
-        @click="handleBackToTop"
-        @keydown.enter="handleBackToTop"
-        data-cursor="circle-white"
-        data-sound="click"
-      >
-        <ButtonRound renderAs="div" variant="border" class="children-unclickable" data-hoversound="hover">
-          <ArrowRightLong class="footer-back-to-top-icon" />
-        </ButtonRound>
-      </div>
-      <div v-if="withSocial" class="footer-top">
-        <Social />
+      <div class="footer-top">
+        <div class="footer-top-left">
+          <Social v-if="withSocial" />
+        </div>
+        <div
+          class="footer-back-to-top"
+          tabindex="0"
+          @click="handleBackToTop"
+          @keydown.enter="handleBackToTop"
+          data-cursor="circle-white"
+          data-sound="click"
+        >
+          <ButtonRound renderAs="div" variant="border" class="children-unclickable" data-hoversound="hover">
+            <ArrowRightLong class="footer-back-to-top-icon" />
+          </ButtonRound>
+        </div>
+        <div class="footer-top-right"></div>
       </div>
       <div class="footer-credits">
         <p>© {{ new Date().getFullYear() }} Duta Alamin</p>
@@ -55,26 +58,52 @@ const { withSocial = true } = defineProps<Props>();
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-lg);
+    gap: var(--space-xl);
     width: 100%;
     max-width: calc(var(--breakpoint-xxxl));
     padding: calc(var(--space-outer) + var(--space-sm)) var(--space-outer);
     position: relative;
   }
 
+  &-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+    width: 100%;
+
+    @include mixins.mq("md") {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+    }
+
+    &-left {
+      display: flex;
+      justify-content: center;
+
+      @include mixins.mq("md") {
+        justify-content: flex-start;
+      }
+    }
+
+    &-right {
+      display: none;
+
+      @include mixins.mq("md") {
+        display: block;
+      }
+    }
+  }
+
   &-back-to-top {
     cursor: pointer;
+    display: flex;
+    justify-content: center;
 
     &-icon {
       transform: rotate(-90deg);
     }
-  }
-
-  &-top {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
   }
 
   &-credits {
