@@ -33,8 +33,8 @@ const { withSocial = true } = defineProps<Props>();
           <ArrowRightLong class="footer-back-to-top-icon" />
         </ButtonRound>
       </div>
-      <div class="footer-top">
-        <Social v-if="withSocial" />
+      <div v-if="withSocial" class="footer-top">
+        <Social />
       </div>
       <div class="footer-credits">
         <p>© {{ new Date().getFullYear() }} Duta Alamin</p>
@@ -55,7 +55,7 @@ const { withSocial = true } = defineProps<Props>();
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-xl);
+    gap: var(--space-lg);
     width: 100%;
     max-width: calc(var(--breakpoint-xxxl));
     padding: calc(var(--space-outer) + var(--space-sm)) var(--space-outer);
@@ -64,13 +64,6 @@ const { withSocial = true } = defineProps<Props>();
 
   &-back-to-top {
     cursor: pointer;
-
-    @include mixins.mq("md") {
-      position: absolute;
-      top: calc(var(--space-outer) + var(--space-sm));
-      left: 50%;
-      transform: translateX(-50%);
-    }
 
     &-icon {
       transform: rotate(-90deg);
