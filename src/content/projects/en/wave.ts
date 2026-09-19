@@ -4,10 +4,10 @@ import type { ProjectContent } from "../../types";
 export default {
   title: "Wave",
   theme: "dark",
-  tags: ["react", "node"],
+  tags: ["react", "next"],
   videoBorder: false,
   live: "https://wavewave.vercel.app/",
-  description: "Digital Platform focusing on interactive user experiences.",
+  description: "A sleek, modern portfolio website for an architectural and interior design firm, showcasing luxury residential concepts, spatial planning, and clean aesthetic structures.",
   components: [
     {
       type: "media",

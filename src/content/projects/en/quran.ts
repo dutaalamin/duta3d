@@ -7,7 +7,7 @@ export default {
   tags: ["react", "node"],
   videoBorder: false,
   live: "https://dquran.vercel.app/",
-  description: "Al-Quran Digital Platform built with modern web technologies.",
+  description: "A comprehensive digital Al-Quran web platform designed to deliver a serene, accessible reading and study experience. Features include complete Surah indexing, ayah-by-ayah translations, customizable Arabic typography, audio recitations, and a distraction-free interface optimized across all screen sizes.",
   components: [
     {
       type: "media",

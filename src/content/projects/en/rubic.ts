@@ -4,10 +4,10 @@ import type { ProjectContent } from "../../types";
 export default {
   title: "Rubic",
   theme: "dark",
-  tags: ["react", "postgresql"],
+  tags: ["three", "react"],
   videoBorder: false,
   live: "https://rubicduta.vercel.app/",
-  description: "A robust digital platform designed for scalability.",
+  description: "An interactive 3D Rubik's Cube game built with Three.js, featuring smooth cube rotations, intuitive manipulation controls, and responsive spatial puzzle mechanics.",
   components: [
     {
       type: "media",

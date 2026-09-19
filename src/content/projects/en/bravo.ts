@@ -7,7 +7,7 @@ export default {
   tags: ["next", "javascript"],
   videoBorder: false,
   live: "https://dutabravo.vercel.app/",
-  description: "AI-powered marketing platform to boost engagement.",
+  description: "An intelligent AI-driven marketing and brand amplification platform built to streamline creative copywriting, audience segmentation, and automated growth campaigns. Engineered with modern full-stack web architecture to empower businesses with high-converting digital assets and real-time performance analytics.",
   components: [
     {
       type: "media",

@@ -7,7 +7,7 @@ import { Color } from "three";
 import type { Object3D } from "three";
 
 const backgroundColor = colors.beigeLight.clone().convertLinearToSRGB();
-const shadowColor = new Color("rgb(215, 194, 169)");
+const shadowColor = new Color("#ddc0ca");
 
 const init = () => {
   initObjects();

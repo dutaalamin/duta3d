@@ -4,10 +4,10 @@ import type { ProjectContent } from "../../types";
 export default {
   title: "Draken",
   theme: "dark",
-  tags: ["react", "css"],
+  tags: ["react", "javascript"],
   videoBorder: false,
   live: "https://dutadraken.vercel.app/",
-  description: "Software and tools service platform.",
+  description: "A high-performance software utility and digital tooling hub designed for modern engineers and creative agencies. Features specialized development workflows, responsive management consoles, and modular utilities aimed at simplifying complex technical operations and boosting team productivity.",
   components: [
     {
       type: "media",

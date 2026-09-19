@@ -17,13 +17,13 @@ export default [
     title: "Wave",
     slug: "wave",
     thumbnail: thumbnailWave,
-    description: "Digital Platform",
+    description: "Architecture & Design Firm",
   },
   {
     title: "Rubic",
     slug: "rubic",
     thumbnail: thumbnailRubic,
-    description: "Digital Platform",
+    description: "Interactive 3D Rubik's Game",
   },
   {
     title: "Bravo",
