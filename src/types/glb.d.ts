@@ -3,6 +3,11 @@ declare module "*.glb" {
   export default src;
 }
 
+declare module "*.fbx" {
+  const src: string;
+  export default src;
+}
+
 declare module "*.glsl" {
   const value: string;
   export default value;

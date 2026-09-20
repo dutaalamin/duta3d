@@ -102,13 +102,17 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
   <ProjectedElement :point="point">
     <div ref="wrapperRef" class="box-details">
       <div class="box-details-content">
-        <div class="box-details-title">
-          <AppearingText
-            text="Duta"
-            :steps="1"
-            :duration="0.35"
-            @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
-          />
+        <div class="box-details-hud-tag">// OPERATOR IDENT</div>
+        <div class="box-details-header">
+          <div class="box-details-title">
+            <AppearingText
+              text="Duta"
+              :steps="1"
+              :duration="0.35"
+              @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0)"
+            />
+          </div>
+          <span class="box-details-badge">LVL 99</span>
         </div>
         <div class="box-details-items">
           <div class="box-details-item">
@@ -139,13 +143,13 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
     position: absolute;
     padding-bottom: 3px;
     padding-right: var(--line-length);
-    width: 240px;
-    max-width: calc(var(--svw) * 30);
+    width: 250px;
+    max-width: calc(var(--svw) * 32);
     transform: translate(-100%, -50%);
   }
 
   @include mixins.landscape-large {
-    width: 240px;
+    width: 250px;
   }
 
   &::after,
@@ -163,10 +167,11 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
     top: 50%;
     transform: translateY(-50%);
     right: 0;
-    width: 11px;
-    height: 11px;
-    background-color: var(--color-cyan-400);
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-orange-400);
     border-radius: 50%;
+    box-shadow: 0 0 10px var(--color-orange-400);
   }
 
   &::before {
@@ -177,14 +182,48 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
     right: 0;
     width: var(--line-length);
     height: 0;
-    border-bottom: var(--stroke-sm) solid var(--color-cyan-400);
+    border-bottom: 1px solid var(--color-orange-400);
+    box-shadow: 0 0 6px rgba(56, 189, 248, 0.4);
+  }
+
+  &-hud-tag {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--color-orange-400);
+    margin-bottom: 2px;
+    font-family: monospace;
+  }
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  &-badge {
+    font-size: 9px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--color-orange-400);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    letter-spacing: 1px;
+    font-family: monospace;
   }
 
   &-content {
-    border: var(--stroke-sm) solid var(--color-cyan-400);
-    border-radius: var(--radius-md);
-    background: linear-gradient(to bottom, var(--color-hologram-top) 0%, var(--color-hologram-bottom) 100%);
-    gap: var(--space-xxs);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    border-left: 3px solid var(--color-orange-400);
+    border-radius: 6px;
+    background: rgba(18, 22, 31, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    color: var(--color-text-400);
+    gap: 4px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -213,7 +252,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
   &-icon {
     width: var(--icon-size-xxs);
     transform: translateY(-1px);
-    --icon-color: var(--color-white-400);
+    --icon-color: var(--color-text-400);
 
     @include mixins.mq("md") {
       width: var(--icon-size-xs);

@@ -1,16 +1,15 @@
 import { Howl } from "howler";
-
-import trackLuci from "../../../assets/music/luci.ogg";
-import trackAbout from "../../../assets/music/ambient-pads.ogg";
-
 import type { MusicTrack } from "../types";
 
+// Empty base64 audio stub so no large music files are bundled
+const emptyAudio = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=";
+
 export const musicTracks = {
-  luci: new Howl({ src: [trackLuci], loop: true, volume: 0, preload: false }),
-  about: new Howl({ src: [trackAbout], loop: true, volume: 0, preload: false }),
+  luci: new Howl({ src: [emptyAudio], loop: true, volume: 0, preload: false }),
+  about: new Howl({ src: [emptyAudio], loop: true, volume: 0, preload: false }),
 } as const;
 
 export const BASE_VOLUMES = {
-  luci: 0.2,
-  about: 0.3,
+  luci: 0,
+  about: 0,
 } as const satisfies Record<MusicTrack, number>;

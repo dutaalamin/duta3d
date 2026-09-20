@@ -20,10 +20,8 @@ export const useHeaderTheme = ({
       const aboutBounding = aboutElement.getBoundingClientRect();
       const isLandscape = sizes.isLandscape;
       const isScrolledIntoView = aboutBounding.top - (isLandscape ? sizes.height * 0.225 : 0) < 0;
-      const isScrolledPast = aboutBounding.bottom - 36 < 0;
-
       hasScrolledIntoView.value = isScrolledIntoView;
-      isDarkTheme.value = isScrolledIntoView && !isScrolledPast;
+      isDarkTheme.value = false;
 
       if (typeof onUpdate === "function") {
         onUpdate(aboutElement, aboutBounding, isScrolledIntoView);

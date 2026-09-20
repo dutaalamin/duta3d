@@ -149,7 +149,7 @@ watch(
           :style="{ '--contact-bottom': `${contactBottom}px` }"
         >
           <canvas :class="['three-canvas', { 'three-canvas-contact': !isStickyVisible }]" ref="threeCanvasRef"></canvas>
-          <div :class="{ 'intro-about-hidden': !isStickyVisible }">
+          <div class="intro-about-container" :class="{ 'intro-about-hidden': !isStickyVisible }">
             <About :spacer-ref="aboutSpacerRef" />
           </div>
         </div>
@@ -174,6 +174,7 @@ watch(
   max-height: calc(var(--lvh) * 100);
   position: relative;
   overflow: hidden;
+  pointer-events: none;
 
   &-contact {
     position: absolute;
@@ -217,6 +218,8 @@ watch(
   }
 
   &-contact {
+    position: relative;
+    z-index: 10;
     width: 100%;
     min-height: calc(var(--lvh) * 100);
     max-height: calc(var(--lvh) * 100);
@@ -226,6 +229,7 @@ watch(
 .about-spacer {
   max-height: calc(var(--lvh) * 250);
   min-height: calc(var(--lvh) * 250);
+  pointer-events: none;
 }
 
 .intro-wrapper {
@@ -235,6 +239,7 @@ watch(
 
   &-spacer {
     display: none;
+    pointer-events: none;
 
     @include mixins.mq("md") {
       display: block;
@@ -251,10 +256,20 @@ watch(
   max-height: calc(var(--lvh) * 100);
   min-height: calc(var(--lvh) * 100);
   overflow: hidden;
+  z-index: 10;
+}
+
+.intro-about-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 .intro-about-hidden {
   visibility: hidden;
+  pointer-events: none;
 }
 
 .intro-sticky {
@@ -264,9 +279,10 @@ watch(
   max-height: calc(var(--lvh) * 100);
   min-height: calc(var(--lvh) * 100);
   overflow: hidden;
-  z-index: -1;
+  z-index: 2;
   display: flex;
   align-items: flex-end;
+  pointer-events: none;
 
   &-visible {
     position: sticky;

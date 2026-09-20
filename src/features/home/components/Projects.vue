@@ -3,7 +3,7 @@ import { ref, watch, onMounted } from "vue";
 import { previews } from "../../../content/projects/previews";
 import { locale } from "../../../i18n/store";
 import PreviewCard from "../../projects/components/PreviewCard.vue";
-import NotchSection from "../../../components/NotchSection.vue";
+
 import Banner from "../../../components/Banner.vue";
 import { t } from "../../../i18n/utils/translate";
 import { isFeatureEnabled } from "../../../utils/features";
@@ -32,8 +32,6 @@ onMounted(loadPreviews);
 
 <template>
   <div class="projects">
-    <NotchSection class="projects-notch-start" />
-    <NotchSection class="projects-notch-end" />
     <div class="grid">
       <div class="projects-title">
         <Banner class="projects-title-banner" :copy="t('selected')" size="sm" animated />
@@ -115,24 +113,7 @@ onMounted(loadPreviews);
     }
   }
 
-  &-notch {
-    &-start {
-      position: absolute;
-      top: 0;
-      left: 0;
-      transform: translateY(-100%);
-      color: var(--color-beige-400);
-      --icon-color: var(--color-beige-400);
-    }
 
-    &-end {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      color: var(--color-beige-600);
-      --icon-color: var(--color-beige-600);
-    }
-  }
 
   &-cards {
     max-width: 100%;

@@ -2,8 +2,6 @@
 import Header from "./components/Header.vue";
 import { useTranslations } from "./i18n/composables/useTranslations";
 import { usePreloader } from "./composables/usePreloader";
-import Cursor from "./components/Cursor.vue";
-import { useAgent } from "./composables/useAgent";
 import { useMusic } from "./features/sounds/composables/useMusic";
 import { useHowler } from "./features/sounds/composables/useHowler";
 import { useRouteObserver } from "./composables/useRouteObserver";
@@ -13,8 +11,6 @@ import { useProjectTransition } from "./composables/useProjectTransition";
 import { useScroll } from "./composables/useScroll";
 import { projectVisible } from "./composables/useRouteObserver";
 import ProjectBackground from "./features/projects/components/ProjectBackground.vue";
-import { useClickSound } from "./features/sounds/composables/useClickSounds";
-//import { useHoverSound } from "./features/sounds/composables/useHoverSounds";
 
 const { isTransitioning } = useProjectTransition();
 
@@ -24,9 +20,6 @@ useMusic();
 useHowler();
 useScroll();
 useRouteObserver();
-useClickSound();
-//useHoverSound();
-const { isTouch } = useAgent();
 </script>
 
 <template>
@@ -50,8 +43,6 @@ const { isTouch } = useAgent();
       <Project />
     </div>
   </div>
-
-  <Cursor v-if="!isTouch" />
 </template>
 
 <style lang="scss">

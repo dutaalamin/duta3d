@@ -75,8 +75,9 @@ watchEffect((onInvalidate) => {
 
   &-background {
     position: absolute;
-    outline: var(--stroke-lg) solid var(--color-beige-400);
-    background-color: #263c70;
+    outline: var(--stroke-lg) solid rgba(255, 0, 85, 0.4);
+    background-color: #ff0055;
+    box-shadow: 0 0 16px rgba(255, 0, 85, 0.4);
     top: 0;
     left: 0;
     width: 100%;

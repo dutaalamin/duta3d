@@ -98,6 +98,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
   <ProjectedElement :point="point">
     <div ref="wrapperRef" class="box-description">
       <div class="box-description-content">
+        <div class="box-description-hud-tag">// MISSION BRIEF</div>
         <div class="box-description-details">
           <p class="box-description-details-name">Duta</p>
           <div class="box-description-details-location">
@@ -145,10 +146,19 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
     max-width: calc(var(--svw) * 32);
   }
 
+  &-hud-tag {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--color-orange-400);
+    margin-bottom: 6px;
+    font-family: monospace;
+  }
+
   &-line {
     width: 100%;
     height: 1px;
-    background-color: var(--color-cyan-400);
+    background-color: rgba(56, 189, 248, 0.2);
 
     @include mixins.landscape {
       display: none;
@@ -177,7 +187,7 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 
       &-icon {
         width: var(--icon-size-xs);
-        --icon-color: var(--color-white-400);
+        --icon-color: var(--color-text-400);
         transform: translateY(-1px);
       }
 
@@ -190,7 +200,6 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
   &::after,
   &::before {
     display: none;
-
     @include mixins.landscape {
       display: block;
     }
@@ -202,10 +211,11 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
     top: 50%;
     transform: translateY(-50%);
     right: 0;
-    width: 11px;
-    height: 11px;
-    background-color: var(--color-cyan-400);
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-orange-400);
     border-radius: 50%;
+    box-shadow: 0 0 10px var(--color-orange-400);
   }
 
   &::before {
@@ -216,13 +226,19 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
     right: 0;
     width: var(--line-length);
     height: 0;
-    border-top: var(--stroke-sm) solid var(--color-cyan-400);
+    border-top: 1px solid var(--color-orange-400);
+    box-shadow: 0 0 6px rgba(56, 189, 248, 0.4);
   }
 
   &-content {
-    border: var(--stroke-sm) solid var(--color-cyan-400);
-    border-radius: var(--radius-md);
-    background: linear-gradient(to bottom, var(--color-hologram-top) 0%, var(--color-hologram-bottom) 100%);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    border-left: 3px solid var(--color-orange-400);
+    border-radius: 6px;
+    background: rgba(18, 22, 31, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    color: var(--color-text-400);
 
     @include mixins.landscape {
       padding: var(--space-xs) var(--space-sm);

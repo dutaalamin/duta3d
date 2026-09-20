@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { scene } from "./scene";
 import { renderTarget } from "./renderTarget";
 import { camera } from "./camera";
-import { sceneWeights } from "../../animations/scenes";
+import { sceneWeights, sceneWeightsInOut } from "../../animations/scenes";
 import { colors } from "../common/colors";
 import { threeSizes } from "../utils/sizes";
 
@@ -55,8 +55,16 @@ const tick = () => {
     renderTarget.render();
   }
 
-  const color = sceneWeights.contact > 0.001 ? colors.beigeDark : colors.beigeLight;
-  instance.setClearColor(color);
+  const targetColor = colors.beigeLight.clone();
+  if (sceneWeights.contact > 0.001) {
+    targetColor.copy(colors.beigeDark);
+  } else if (sceneWeightsInOut.hero.out > 0.05) {
+    const t = Math.min(1, Math.max(0, (sceneWeightsInOut.hero.out - 0.05) / 0.55));
+    targetColor.lerp(colors.aboutTone, t);
+  } else if (sceneWeights.about > 0.001) {
+    targetColor.lerp(colors.aboutTone, sceneWeights.about);
+  }
+  instance.setClearColor(targetColor);
   instance.render(scene.instance, camera.instance);
 };
 

@@ -1,6 +1,7 @@
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import { SRGBColorSpace, TextureLoader } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import EventEmitter from "./EventEmitter";
 import { sources } from "../sources";
 
@@ -24,6 +25,7 @@ class Resources extends EventEmitter<{
     gltfLoader: GLTFLoader;
     textureLoader: TextureLoader;
     fontLoader: FontLoader;
+    fbxLoader: FBXLoader;
   };
 
   constructor() {
@@ -33,6 +35,7 @@ class Resources extends EventEmitter<{
       gltfLoader: new GLTFLoader(),
       textureLoader: new TextureLoader(),
       fontLoader: new FontLoader(),
+      fbxLoader: new FBXLoader(),
     };
   }
 
@@ -44,6 +47,24 @@ class Resources extends EventEmitter<{
         this.loaders.gltfLoader.load(source.path, (file) => {
           this.sourceLoaded(source, file);
         });
+      } else if (source.type === "fbxModel") {
+        this.loaders.fbxLoader.load(
+          source.path,
+          (file) => {
+            this.sourceLoaded(source, file as any);
+          },
+          (xhr) => {
+            if (xhr.lengthComputable) {
+              const percent = Math.round((xhr.loaded / xhr.total) * 100);
+              if (percent % 25 === 0) {
+                this.log(`Loading FBX ${source.name}: ${percent}%`);
+              }
+            }
+          },
+          (error) => {
+            console.error(`[Resources] Error loading FBX ${source.name}:`, error);
+          }
+        );
       } else if (source.type === "texture") {
         this.loaders.textureLoader.load(source.path, (file: Texture) => {
           file.colorSpace = SRGBColorSpace;

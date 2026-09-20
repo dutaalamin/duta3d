@@ -1,36 +1,39 @@
 :root {
-  --color-text-400: #2c1e24;
-  --color-text-300: #68535c;
+  --color-text-400: #f4f4f6;
+  --color-text-300: #a1a1aa;
+  --color-text-200: #71717a;
 
-  --color-grayscale-500: #dec1cb;
-  --color-grayscale-400: #ebd3db;
+  --color-grayscale-500: #1c1a20;
+  --color-grayscale-400: #2c2832;
 
-  --color-beige-700: #dec1cb;
-  --color-beige-600: #ebd3db;
-  --color-beige-500: #f4dfe5;
-  --color-beige-400: #f8e9ec;
+  --color-beige-700: #2a2530;
+  --color-beige-600: #1c1822;
+  --color-beige-500: #131118;
+  --color-beige-400: #0b0b0e;
 
-  --color-background-400: #f8e9ec;
+  --color-background-400: #0b0b0e;
 
-  --color-black-400: #2c1e24;
+  --color-black-400: #060608;
 
-  --color-gray-500: #7c6770;
-  --color-gray-400: #ad9ba3;
+  --color-gray-500: #71717a;
+  --color-gray-400: #a1a1aa;
 
-  --color-orange-400: #ff5287;
+  /* Tekken Crimson Red Accent (Matching About badges) */
+  --color-orange-400: #ff0055;
+  --color-orange-500: #d60046;
 
   --color-white-400: #ffffff;
 
-  --color-cyan-500: #0086bb;
-  --color-cyan-400: rgb(52, 191, 255);
+  --color-cyan-500: #ff0055;
+  --color-cyan-400: #ff2a6d;
 
-  --color-text-cyan-400: #e1f5ff;
-  --color-text-cyan-300: #81bdd8;
+  --color-text-cyan-400: #ffe4ec;
+  --color-text-cyan-300: #ff8da7;
 
-  --color-dark-blue-600: #234ba2;
-  --color-dark-blue-500: #052e87;
-  --color-dark-blue-400: #002474;
+  --color-dark-blue-600: #1c1822;
+  --color-dark-blue-500: #131118;
+  --color-dark-blue-400: #0b0b0e;
 
-  --color-hologram-top: rgb(0, 53, 133);
-  --color-hologram-bottom: rgba(0, 82, 145, 0.6);
+  --color-hologram-top: rgba(255, 0, 85, 0.4);
+  --color-hologram-bottom: rgba(255, 0, 85, 0.1);
 }

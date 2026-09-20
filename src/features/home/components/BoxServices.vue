@@ -131,6 +131,7 @@ const services = computed(() => {
   <ProjectedElement :point="point">
     <div ref="wrapperRef" class="box-services">
       <div class="box-services-content">
+        <div class="box-services-hud-tag">// ABILITIES // TECH STACK</div>
         <div class="box-services-title">
           <AppearingText
             :text="t('services')"
@@ -141,14 +142,18 @@ const services = computed(() => {
         </div>
         <div class="box-services-list">
           <div class="box-services-list-item" v-for="(service, index) in services" :key="service.name">
-            <p class="box-services-list-item-name">
-              <AppearingText
-                :text="service.name"
-                :steps="1"
-                :duration="0.35"
-                @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.15 + index * 0.1)"
-              />
-            </p>
+            <div class="box-services-list-item-row">
+              <span class="box-services-bullet">▸</span>
+              <p class="box-services-list-item-name">
+                <AppearingText
+                  :text="service.name"
+                  :steps="1"
+                  :duration="0.35"
+                  @timeline:created="(tl: gsap.core.Timeline) => handleTimelineCreated(tl, 0.15 + index * 0.1)"
+                />
+              </p>
+              <span class="box-services-stat-tag">MAX</span>
+            </div>
           </div>
         </div>
       </div>
@@ -196,10 +201,11 @@ const services = computed(() => {
     top: 50%;
     transform: translateY(-50%);
     left: 0;
-    width: 11px;
-    height: 11px;
-    background-color: var(--color-cyan-400);
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-orange-400);
     border-radius: 50%;
+    box-shadow: 0 0 10px var(--color-orange-400);
   }
 
   &::before {
@@ -209,20 +215,35 @@ const services = computed(() => {
     transform: translateY(-50%);
     left: 0;
     height: 0;
-    border-top: var(--stroke-sm) solid var(--color-cyan-400);
+    border-top: 1px solid var(--color-orange-400);
+    box-shadow: 0 0 6px rgba(56, 189, 248, 0.4);
 
     @include mixins.landscape {
       width: var(--line-length);
     }
   }
 
+  &-hud-tag {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--color-orange-400);
+    margin-bottom: 2px;
+    font-family: monospace;
+  }
+
   &-content {
-    border: var(--stroke-sm) solid var(--color-cyan-400);
-    border-radius: var(--radius-md);
-    background: linear-gradient(to bottom, var(--color-hologram-top) 0%, var(--color-hologram-bottom) 100%);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    border-right: 3px solid var(--color-orange-400);
+    border-radius: 6px;
+    background: rgba(18, 22, 31, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    color: var(--color-text-400);
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
+    gap: var(--space-xs);
     padding: var(--space-sm) var(--space-md);
 
     @include mixins.landscape {
@@ -237,42 +258,56 @@ const services = computed(() => {
   &-list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-xs);
+    gap: 6px;
 
     &-item {
       display: flex;
       flex-direction: column;
-      padding-left: 18px;
-      position: relative;
 
-      &::before {
-        content: "";
-        position: absolute;
-        left: 2px;
-        top: 6px;
-        width: 4px;
-        height: 4px;
-        background-color: var(--color-text-cyan-400);
-        border-radius: 50%;
+      &-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
       }
 
       &-name {
         font-size: var(--font-size-md);
+        flex: 1;
 
         @include mixins.landscape {
           font-size: var(--font-size-sm);
         }
 
         @include mixins.landscape-large {
-          font-size: var(--font-size-lg);
+          font-size: var(--font-size-md);
         }
       }
     }
   }
 
+  &-bullet {
+    color: var(--color-orange-400);
+    font-size: 11px;
+    line-height: 1;
+  }
+
+  &-stat-tag {
+    font-size: 8px;
+    font-weight: 800;
+    padding: 1px 5px;
+    border-radius: 2px;
+    background: rgba(56, 189, 248, 0.12);
+    color: var(--color-orange-400);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    font-family: monospace;
+    letter-spacing: 0.5px;
+  }
+
   &-title {
     font-size: var(--font-size-title-xs);
     font-weight: 700;
+    letter-spacing: 1px;
 
     @include mixins.landscape {
       font-size: var(--font-size-title-xxs);

@@ -124,15 +124,15 @@ onMounted(() => {
     position: relative;
     display: flex;
     padding: 3px;
-    background-color: var(--color-beige-500);
+    background: transparent;
+    border: none;
     border-radius: 100px;
     color: var(--color-text-400);
-    transition:
-      color 0.1s ease-in-out,
-      background-color 0.1s ease-in-out;
+    box-shadow: none;
+    transition: color 0.1s ease-in-out;
 
     &-dark {
-      background-color: var(--color-dark-blue-500);
+      background: transparent;
       color: var(--color-white-400);
     }
   }
@@ -143,17 +143,17 @@ onMounted(() => {
     left: 3px;
     height: calc(100% - 6px);
     width: 128px;
-    background: var(--color-orange-400);
+    background: #ff0055;
+    box-shadow: 0 0 16px rgba(255, 0, 85, 0.7);
     border-radius: 100px;
     transition:
       transform 0.3s var(--ease-smooth),
-      opacity 0.1s ease-in-out,
-      background-color 0.1s ease-in-out;
+      opacity 0.1s ease-in-out;
     z-index: 1;
     opacity: 0;
 
     &-dark {
-      background-color: var(--color-cyan-500);
+      background: #ff0055;
     }
 
     &-active {

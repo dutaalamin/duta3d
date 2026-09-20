@@ -34,7 +34,7 @@ onBeforeUnmount(() => {
 .progress-count {
   font-size: var(--font-size-sm);
   font-weight: 700;
-  color: var(--color-text-cyan-400);
+  color: var(--color-text-300);
   font-family: "ProFontWindows";
   text-align: center;
   align-items: center;
@@ -48,13 +48,13 @@ onBeforeUnmount(() => {
 
   &-bar {
     width: 100%;
-    height: 1px;
+    height: 2px;
     border-radius: var(--radius-md);
     grid-column: 2 / 10;
-    background-color: var(--color-hologram-bottom);
+    background-color: rgba(44, 30, 36, 0.12);
 
     &-fill {
-      background-color: var(--color-cyan-400);
+      background-color: var(--color-orange-400);
       height: 100%;
       border-radius: var(--radius-md);
     }
