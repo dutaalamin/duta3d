@@ -13,7 +13,7 @@ const handleLinkClick = (link: string) => {
 };
 
 type ActiveLink = "about" | "projects" | "contact";
-const activeLink = ref<ActiveLink | null>(null);
+const activeLink = ref<ActiveLink | null>("about");
 const sections: ActiveLink[] = ["about", "projects", "contact"];
 const ariaLabels = {
   about: t("about"),

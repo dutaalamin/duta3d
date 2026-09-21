@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Layout from "../../../components/Layout.vue";
-import Hero from "./Hero.vue";
 import About from "./About.vue";
 //import AboutSections from "../features/about/Sections.vue";
 import Projects from "./Projects.vue";
@@ -11,7 +10,6 @@ import { three } from "../../../three";
 import { animations } from "../../../animations";
 import HeaderHome from "../../../components/HeaderHome.vue";
 import { preloaderVisible } from "../../../composables/usePreloader";
-import ScrollIcon from "../../../components/ScrollIcon.vue";
 import { raycast } from "../../../three/utils/raycast";
 import gsap from "gsap";
 import { useAgent } from "../../../composables/useAgent";
@@ -21,18 +19,17 @@ import { renderer } from "../../../three/core/renderer";
 
 const introRef = ref<HTMLElement | null>(null);
 const stickyObserver = ref<IntersectionObserver | null>(null);
-const scrolledPastIntro = ref(false);
+const scrolledPastIntro = ref(true);
 const projectsLoaded = ref(false);
 const contactRef = ref<HTMLElement | null>(null);
 const contactBottom = ref<number>(0);
-const aboutSpacerRef = ref<HTMLElement | null>(null);
 const isHoveringObject3D = ref<boolean>(false);
 const threeCanvasRef = ref<HTMLCanvasElement | null>(null);
 const threeInitialized = ref<boolean>(false);
 const { isTouch } = useAgent();
 
 const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-  scrolledPastIntro.value = entries[0]?.isIntersecting ?? false;
+  scrolledPastIntro.value = entries[0]?.isIntersecting ?? true;
 };
 
 const isStickyVisible = computed(() => {
@@ -140,9 +137,8 @@ watch(
       typeof projectId !== 'string' && isTransitioning && `home-wrapper-in`,
     ]"
   >
-    <ScrollIcon />
     <Layout>
-      <div class="intro-wrapper" ref="introRef">
+      <div class="intro-wrapper" ref="introRef" id="about">
         <div
           class="intro-sticky"
           :class="{ 'intro-sticky-visible': isStickyVisible }"
@@ -150,12 +146,9 @@ watch(
         >
           <canvas :class="['three-canvas', { 'three-canvas-contact': !isStickyVisible }]" ref="threeCanvasRef"></canvas>
           <div class="intro-about-container" :class="{ 'intro-about-hidden': !isStickyVisible }">
-            <About :spacer-ref="aboutSpacerRef" />
+            <About :spacer-ref="introRef" />
           </div>
         </div>
-        <Hero class="intro-hero" id="hero" />
-        <div class="intro-wrapper-spacer"></div>
-        <div class="about-spacer" ref="aboutSpacerRef" id="about"></div>
       </div>
       <Projects id="projects" @loaded="handleProjectsLoaded" />
       <div ref="contactRef" class="home-contact">
@@ -227,8 +220,8 @@ watch(
 }
 
 .about-spacer {
-  max-height: calc(var(--lvh) * 250);
-  min-height: calc(var(--lvh) * 250);
+  max-height: calc(var(--lvh) * 100);
+  min-height: calc(var(--lvh) * 100);
   pointer-events: none;
 }
 

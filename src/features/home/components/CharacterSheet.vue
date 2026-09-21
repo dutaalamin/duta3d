@@ -7,40 +7,32 @@ import { activeFighter } from "../store/characterSelect";
     <!-- Fighter Name Header -->
     <div class="fighter-header">
       <h1 class="fighter-name">{{ activeFighter.name }}</h1>
-      <span class="fighter-subname">{{ activeFighter.subname }}</span>
-    </div>
-
-    <!-- Rank Badge -->
-    <div class="rank-container">
-      <div class="tekken-rank-plate">
-        <span class="rank-engraving">{{ activeFighter.rank }}</span>
-      </div>
     </div>
 
     <!-- Stats Attributes Stack -->
     <div class="tekken-attributes">
       <div class="attr-item">
-        <div class="attr-badge">Fighting Style</div>
+        <div class="attr-badge" :class="{ 'attr-badge-blue': activeFighter.id === 'striker' }">Fighting Style</div>
         <div class="attr-value">{{ activeFighter.fightingStyle }}</div>
       </div>
 
       <div class="attr-item">
-        <div class="attr-badge">Nationality</div>
+        <div class="attr-badge" :class="{ 'attr-badge-blue': activeFighter.id === 'striker' }">Nationality</div>
         <div class="attr-value">{{ activeFighter.nationality }}</div>
       </div>
 
       <div class="attr-item">
-        <div class="attr-badge">Height</div>
+        <div class="attr-badge" :class="{ 'attr-badge-blue': activeFighter.id === 'striker' }">Height</div>
         <div class="attr-value">{{ activeFighter.height }}</div>
       </div>
 
       <div class="attr-item">
-        <div class="attr-badge">Weight</div>
+        <div class="attr-badge" :class="{ 'attr-badge-blue': activeFighter.id === 'striker' }">Weight</div>
         <div class="attr-value">{{ activeFighter.weight }}</div>
       </div>
 
       <div class="attr-item">
-        <div class="attr-badge">Specialty</div>
+        <div class="attr-badge" :class="{ 'attr-badge-blue': activeFighter.id === 'striker' }">Specialty</div>
         <div class="attr-value">{{ activeFighter.specialty }}</div>
       </div>
     </div>
@@ -159,6 +151,12 @@ import { activeFighter } from "../store/characterSelect";
   letter-spacing: 0.6px;
   box-shadow: 0 2px 6px rgba(255, 0, 85, 0.4);
   line-height: 1.3;
+  transition: all 0.3s ease;
+
+  &-blue {
+    background: #0077ff;
+    box-shadow: 0 2px 8px rgba(0, 119, 255, 0.6);
+  }
 }
 
 /* Crisp White Value */

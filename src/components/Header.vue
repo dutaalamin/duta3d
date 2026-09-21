@@ -199,9 +199,9 @@ const getInTouchClassNames = computed(() => {
     cursor: pointer;
     display: flex;
     gap: var(--space-xs);
-    transition: color 0.2s ease-in-out;
-    opacity: var(--scrolled);
-    pointer-events: none;
+    transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    opacity: 1;
+    pointer-events: all;
 
     &-clickable {
       pointer-events: all;
@@ -218,10 +218,12 @@ const getInTouchClassNames = computed(() => {
     }
 
     &-image {
-      width: 36px;
+      width: 125px;
+      height: 38px;
 
       @include mixins.mq("md") {
-        width: 40px;
+        width: 145px;
+        height: 44px;
       }
     }
 

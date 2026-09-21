@@ -1,5 +1,5 @@
 export const features = {
-  sounds: true,
+  sounds: false,
   introWave: true,
   startProject: false,
 } as const;

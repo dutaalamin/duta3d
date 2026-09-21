@@ -5,7 +5,6 @@ import {
   LoopRepeat,
   Mesh,
   SRGBColorSpace,
-  Vector3,
   AmbientLight,
   DirectionalLight,
 } from "three";
@@ -20,15 +19,10 @@ import { activeFighterId, isFighterLoading } from "../../../features/home/store/
 export const isKenneyActive = ref(true);
 
 const rootGroup = new Group();
-const heroGroup = new Group();
 const aboutGroup = new Group();
 const contactGroup = new Group();
 
 // Mixers and actions
-let heroMixer: AnimationMixer | null = null;
-let heroCurrentAction: any = null;
-let heroMeshRef: Group | null = null;
-
 let aboutMixer: AnimationMixer | null = null;
 let aboutCurrentAction: any = null;
 let aboutMeshRef: Group | null = null;
@@ -43,18 +37,7 @@ let contactMixer: AnimationMixer | null = null;
 let contactCurrentAction: any = null;
 let contactMeshRef: Group | null = null;
 
-// Fixed default center position for Hero character
-const floorHeight = 0.65;
-export const characterPos = new Vector3(0.25, floorHeight, 0.35);
-
 const init = () => {
-  // Lighting for Hero character
-  const heroAmbientLight = new AmbientLight(0xffffff, 2.8);
-  const heroDirLight = new DirectionalLight(0xf0f7ff, 2.0);
-  heroDirLight.position.set(2, 6, 3);
-  heroGroup.add(heroAmbientLight);
-  heroGroup.add(heroDirLight);
-
   // Lighting for About character (Crisp AAA character showcase)
   const aboutAmbientLight = new AmbientLight(0xffffff, 2.8);
   const aboutDirLight = new DirectionalLight(0xe0f2fe, 2.2);
@@ -71,12 +54,13 @@ const init = () => {
   contactGroup.add(contactAmbientLight);
   contactGroup.add(contactDirLight);
 
-  initHeroCharacter();
   initAboutCharacter();
   initContactCharacter();
-  preloadStrikerCharacter();
 
-  rootGroup.add(heroGroup);
+  // The striker model (~50 MB) is intentionally NOT preloaded here. It is fetched
+  // on demand by `switchAboutFighter` the first time the visitor picks that fighter,
+  // which keeps the initial page load light. See `preloadStrikerCharacter`.
+
   rootGroup.add(aboutGroup);
   rootGroup.add(contactGroup);
   scene.instance.add(rootGroup);
@@ -86,49 +70,7 @@ const init = () => {
   gsap.ticker.add(tick);
 };
 
-// 1. Hero Character: Swing To Land (Fixed default center position)
-const initHeroCharacter = () => {
-  const fbx = resources.items["hero-character"];
-  if (!fbx) {
-    console.warn("[Kenney] hero-character (Swing To Land) FBX not loaded yet");
-    return;
-  }
-
-  const heroMesh = cloneSkeleton(fbx) as Group;
-  heroMesh.renderOrder = 25;
-
-  heroMesh.traverse((child) => {
-    if (child instanceof Mesh) {
-      child.frustumCulled = false;
-      child.renderOrder = 25;
-      child.castShadow = true;
-      child.receiveShadow = true;
-      if (child.material) {
-        if (Array.isArray(child.material)) {
-          child.material.forEach((m) => {
-            if (m.map) m.map.colorSpace = SRGBColorSpace;
-          });
-        } else if (child.material.map) {
-          child.material.map.colorSpace = SRGBColorSpace;
-        }
-      }
-    }
-  });
-
-  heroMeshRef = heroMesh;
-  heroMixer = new AnimationMixer(heroMesh);
-
-  if (fbx.animations && fbx.animations.length > 0) {
-    const swingClip = fbx.animations[0];
-    heroCurrentAction = heroMixer.clipAction(swingClip);
-    heroCurrentAction.loop = LoopRepeat;
-    heroCurrentAction.play();
-  }
-
-  heroGroup.add(heroMesh);
-};
-
-// 2. About Character: Idle (Default: Architect)
+// 1. About Character: Idle (Default: Architect)
 const initAboutCharacter = () => {
   const fbx = resources.items["about-character"];
   if (!fbx) {
@@ -362,13 +304,10 @@ const initContactCharacter = () => {
 };
 
 const updateTransforms = () => {
-  // Hero Character Transform: fixed center position, 0° front facing
-  heroGroup.position.copy(characterPos);
-  heroGroup.rotation.set(0, 0, 0);
-
-  // About Character Transform: positioned on right side in landscape, center in portrait
-  const isLandscape = typeof window !== "undefined" ? window.innerWidth >= window.innerHeight : true;
-  aboutGroup.position.set(isLandscape ? 0.65 : 0, 0.4, 6);
+  // About Character Transform: centered on the about camera focus, 0° front facing
+  // x must stay 0 — the about waypoint camera looks straight at x = 0, so any
+  // offset shifts the character off-center horizontally.
+  aboutGroup.position.set(0, 0.45, 6);
   aboutGroup.rotation.set(0, 0, 0);
   if (aboutMeshRef) {
     aboutMeshRef.position.set(0, 0.08, 0);
@@ -377,8 +316,10 @@ const updateTransforms = () => {
     strikerMeshRef.position.set(0, 0.08, 0);
   }
 
-  // Contact Character Transform: fixed contact position, 0° front facing
-  contactGroup.position.set(0.3, -12.6, 0.5);
+  // Contact Character Transform: centered on the contact camera focus, 0° front facing
+  // x must stay 0 — the contact camera looks straight at x = 0, so any offset
+  // shifts the character off-center horizontally.
+  contactGroup.position.set(0, -12.6, 0.5);
   contactGroup.rotation.set(0, 0, 0);
   if (contactMeshRef) {
     contactMeshRef.scale.set(0.018, 0.018, 0.018);
@@ -394,29 +335,17 @@ const updateModelVisibility = () => {
 
   rootGroup.visible = true;
 
-  // HERO vs ABOUT: Strictly mutually exclusive to eliminate overlap / collision
-  const heroOut = sceneWeightsInOut.hero.out;
-  const isHero = heroOut < 0.4;
-  heroGroup.visible = isHero;
-
-  if (isHero && heroMeshRef) {
-    const fadeOutProgress = Math.min(1, Math.max(0, (heroOut - 0.15) / 0.25));
-    const heroScale = 0.0155 * (1 - fadeOutProgress);
-    heroMeshRef.scale.set(heroScale, heroScale, heroScale);
-  }
-
-  // ABOUT: Visible only after Hero is exited (>= 0.4) and while in About
-  const isAbout = heroOut >= 0.4 && sceneWeights.contact < 0.2 && sceneWeightsInOut.about.out < 0.9;
+  // ABOUT: Visible directly at top of page until user reaches Contact section
+  const isAbout = sceneWeights.contact < 0.2 && sceneWeightsInOut.about.out < 0.9;
   aboutGroup.visible = isAbout;
 
   if (isAbout) {
-    const fadeInProgress = Math.min(1, Math.max(0, (heroOut - 0.4) / 0.25));
     if (aboutMeshRef && aboutMeshRef.visible) {
-      const aboutScale = 0.016 * fadeInProgress * fighterScaleTransition.architect;
+      const aboutScale = 0.0205 * fighterScaleTransition.architect;
       aboutMeshRef.scale.set(aboutScale, aboutScale, aboutScale);
     }
     if (strikerMeshRef && strikerMeshRef.visible) {
-      const strikerScale = 0.0155 * fadeInProgress * fighterScaleTransition.striker;
+      const strikerScale = 0.020 * fighterScaleTransition.striker;
       strikerMeshRef.scale.set(strikerScale, strikerScale, strikerScale);
     }
   }
@@ -430,17 +359,9 @@ const tick = (_time: number, deltaTime: number) => {
   const dt = Math.min(deltaTime / 1000, 0.1);
 
   if (isKenneyActive.value) {
-    // Hero character animation update
-    if (heroGroup.visible && heroMixer) {
-      heroGroup.position.copy(characterPos);
-      heroGroup.rotation.set(0, 0, 0);
-      heroMixer.update(dt);
-    }
-
     // About character animation update
     if (aboutGroup.visible) {
-      const isLandscape = typeof window !== "undefined" ? window.innerWidth >= window.innerHeight : true;
-      aboutGroup.position.x = isLandscape ? 0.65 : 0;
+      aboutGroup.position.x = 0;
       if (currentFighterId === "architect" && aboutMixer) {
         aboutMixer.update(dt);
       } else if (currentFighterId === "striker" && strikerMixer) {
@@ -458,7 +379,6 @@ const tick = (_time: number, deltaTime: number) => {
 const destroy = () => {
   gsap.ticker.remove(tick);
 
-  if (heroMixer) heroMixer.stopAllAction();
   if (aboutMixer) aboutMixer.stopAllAction();
   if (strikerMixer) strikerMixer.stopAllAction();
   if (contactMixer) contactMixer.stopAllAction();

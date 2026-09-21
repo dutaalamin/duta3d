@@ -1,5 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512"><svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M42.6071 115.2L221.857 12.8C256 -4.26667 256 -4.26667 290.143 12.8L469.393 115.2C495 132.267 495 140.8 495 157.867V362.667C495 388.267 486.464 396.8 452.321 413.867L290.143 499.2C256 516.267 256 516.267 221.857 499.2L59.6786 413.867C25.5357 396.8 17 388.267 17 362.667V157.867C17 140.8 17 132.267 42.6071 115.2ZM256 29.8667L59.6786 140.8L256 234.667L452.321 140.8L256 29.8667ZM469.393 166.4L273.071 260.267V473.6L469.393 371.2V166.4ZM358.429 354.133L298.679 294.4C298.679 294.4 290.143 285.867 298.679 277.333C307.214 268.8 315.75 277.333 324.286 285.867L384.036 345.6C392.571 354.133 392.571 354.133 384.036 362.667L315.75 430.933C315.75 430.933 307.214 439.467 298.679 430.933C290.143 422.4 298.679 413.867 298.679 413.867L358.429 354.133ZM153.571 354.133L213.321 294.4C213.321 294.4 221.857 285.867 213.321 277.333C204.786 268.8 196.25 277.333 187.714 285.867L127.964 345.6C119.429 354.133 119.429 354.133 127.964 362.667L196.25 430.933C196.25 430.933 204.786 439.467 213.321 430.933C221.857 422.4 213.321 413.867 213.321 413.867L153.571 354.133Z" fill="#FF923E"></path>
-</svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
-@media (prefers-color-scheme: dark) { :root { filter: none; } }
-</style></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 90" width="512" height="512">
+  <defs>
+    <linearGradient id="tekken-fav-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="60%" stop-color="#e2e4ed" />
+      <stop offset="100%" stop-color="#ff0055" />
+    </linearGradient>
+  </defs>
+  <!-- Kanji 鉄拳 (Iron Fist) Brush Aura in Crimson Red -->
+  <g fill="#d31227">
+    <path d="M25 15 L50 12 L48 20 L28 22 Z M15 28 L60 24 L58 32 L35 34 L45 55 L36 57 L28 38 L18 48 L12 40 Z M38 35 L62 58 L54 62 L32 40 Z" />
+    <path d="M190 12 L245 10 L242 18 L215 20 L235 32 L225 38 L208 22 L185 30 Z M175 42 L255 38 L250 48 L218 50 L228 65 L215 68 L206 52 L170 54 Z" />
+  </g>
+  <!-- TEKKEN DUTA Wordmark -->
+  <g>
+    <path fill-rule="evenodd" d="M5 8 L64 8 L84 32 L84 48 L64 72 L18 72 L30 36 L12 36 L18 18 L5 8 Z M36 22 L56 22 L66 34 L66 44 L56 56 L30 56 Z" fill="url(#tekken-fav-grad)" stroke="#0b0b0e" stroke-width="3" />
+    <path fill-rule="evenodd" d="M78 8 L100 8 L90 52 L120 52 L130 8 L152 8 L138 72 L68 72 Z M98 22 L112 22 L104 56 L86 56 Z" fill="url(#tekken-fav-grad)" stroke="#0b0b0e" stroke-width="3" />
+    <path d="M120 4 L212 4 L224 18 L198 18 L184 72 L160 72 L174 18 L142 18 L134 26 L120 4 Z" fill="url(#tekken-fav-grad)" stroke="#0b0b0e" stroke-width="3" />
+    <path fill-rule="evenodd" d="M196 72 L224 8 L252 8 L286 72 L260 72 L252 52 L224 52 L216 72 Z M231 22 L244 22 L246 40 L225 40 Z M260 72 L296 80 L270 64 Z" fill="url(#tekken-fav-grad)" stroke="#0b0b0e" stroke-width="3" />
+    <path d="M0 48 L300 48 L285 54 L0 54 Z" fill="#ff0055" />
+  </g>
+</svg>

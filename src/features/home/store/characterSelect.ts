@@ -29,7 +29,7 @@ export const fighters: FighterCharacter[] = [
     specialty: "Interactive WebGL & Scalable Architecture",
     badge: "P1",
     iconName: "DEV",
-    avatarPreview: "/images/fighter_architect.png",
+    avatarPreview: "/images/card_architect.png?v=3d",
   },
   {
     id: "striker",
@@ -43,7 +43,7 @@ export const fighters: FighterCharacter[] = [
     specialty: "Zero-Latency Execution & Electric Code",
     badge: "P2",
     iconName: "FGT",
-    avatarPreview: "/images/fighter_striker.png?v=20260920b",
+    avatarPreview: "/images/card_striker.png?v=3d",
   },
 ];
 

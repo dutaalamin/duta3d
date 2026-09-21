@@ -1,9 +1,9 @@
 import gsap from "gsap";
 
 export const sceneWeights = {
-  hero: 1,
-  about: 0,
-  "about-1": 0,
+  hero: 0,
+  about: 1,
+  "about-1": 1,
   "about-2": 0,
   projects: 0,
   contact: 0,
@@ -17,15 +17,15 @@ const sceneWeightKeys = Object.keys(sceneWeights);
 
 export const sceneWeightsInOut = {
   hero: {
+    in: 0,
+    out: 1,
+  },
+  about: {
     in: 1,
     out: 0,
   },
-  about: {
-    in: 0,
-    out: 0,
-  },
   "about-1": {
-    in: 0,
+    in: 1,
     out: 0,
   },
   "about-2": {
