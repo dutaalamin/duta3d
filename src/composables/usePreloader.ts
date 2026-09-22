@@ -5,7 +5,6 @@ import gsap from "gsap";
 export const preloaderVisible = ref(true);
 
 export const usePreloader = () => {
-  const progress = ref(0);
   const resourcesProgress = ref(0);
 
   onMounted(() => {
@@ -14,29 +13,18 @@ export const usePreloader = () => {
     });
   });
 
-  watch(
-    resourcesProgress,
-    (newProgress) => {
-      progress.value = 0.25 + newProgress * 0.75;
-    },
-    { immediate: true },
-  );
+  // The preloader renders the logo at full brightness and does not visualise
+  // progress — there is no bar or fill animation. It stays on screen until
+  // every asset is ready, then fades out.
+  watch(resourcesProgress, (newProgress) => {
+    if (newProgress < 1) return;
 
-  watch(
-    progress,
-    (newProgress) => {
-      const rect = document.querySelector(".preloader-rect") as HTMLElement;
-      const preloader = document.querySelector(".preloader") as HTMLElement;
-      if (newProgress === 1) {
-        gsap.delayedCall(0.2, () => {
-          document.body.classList.remove("is-loading");
-          preloader.classList.add("preloader-hidden");
-          preloaderVisible.value = false;
-        });
-      }
+    const preloader = document.querySelector(".preloader") as HTMLElement | null;
 
-      if (rect) rect.style.transform = `scaleY(${newProgress})`;
-    },
-    { immediate: true },
-  );
+    gsap.delayedCall(0.2, () => {
+      document.body.classList.remove("is-loading");
+      preloader?.classList.add("preloader-hidden");
+      preloaderVisible.value = false;
+    });
+  });
 };

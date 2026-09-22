@@ -12,7 +12,7 @@
   transition: opacity 0.3s ease-in-out;
   opacity: 1;
 
-  /* The DUTA wordmark is 300x90; the mask in index.html fills bottom-up. */
+  /* The DUTA wordmark, 300x76. Shown at full brightness immediately. */
   &-svg {
     width: min(440px, 68vw);
     height: auto;
@@ -20,11 +20,6 @@
     transition:
       transform 0.2s var(--ease-power2-in),
       opacity 0.2s var(--ease-power2-in);
-  }
-
-  &-rect {
-    transform-origin: bottom center;
-    transition: transform 0.3s ease-in-out;
   }
 
   &-hidden {
