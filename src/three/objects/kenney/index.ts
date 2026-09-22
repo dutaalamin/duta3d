@@ -58,7 +58,7 @@ const init = () => {
   gsap.ticker.add(tick);
 };
 
-// 1. About Character: Idle (Default: Architect)
+// 1. About Character: Idle
 const initAboutCharacter = () => {
   const fbx = resources.items["about-character"];
   if (!fbx) {

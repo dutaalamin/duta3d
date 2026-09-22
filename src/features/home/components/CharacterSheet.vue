@@ -28,12 +28,7 @@ import { fighter } from "../store/fighter";
 
       <div class="attr-item">
         <div class="attr-badge">Skill</div>
-        <div class="skill-groups">
-          <div v-for="group in fighter.skills" :key="group.label" class="skill-group">
-            <span class="skill-group-label">{{ group.label }}</span>
-            <span class="skill-group-items">{{ group.items.join(" · ") }}</span>
-          </div>
-        </div>
+        <div class="attr-value">{{ fighter.skill }}</div>
       </div>
 
       <div class="attr-item">
@@ -120,39 +115,5 @@ import { fighter } from "../store/fighter";
   @include mixins.mq("md") {
     font-size: 16px;
   }
-}
-
-/* Grouped skills: one compact line per category */
-.skill-groups {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  margin-top: 1px;
-}
-
-.skill-group {
-  display: flex;
-  align-items: baseline;
-  gap: 9px;
-}
-
-.skill-group-label {
-  flex: 0 0 auto;
-  min-width: 78px;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 1.4px;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.38);
-}
-
-.skill-group-items {
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  text-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.9),
-    0 1px 2px rgba(0, 0, 0, 1);
 }
 </style>

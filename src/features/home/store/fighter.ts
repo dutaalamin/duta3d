@@ -1,22 +1,10 @@
 export interface FighterCharacter {
-  id: "architect";
   name: string;
-  subname: string;
   fightingStyle: string;
   nationality: string;
   height: string;
-  skills: SkillGroup[];
+  skill: string;
   specialty: string;
-}
-
-/**
- * One labelled row of skills, e.g. "Frontend — Vue · React · TypeScript".
- * Grouping keeps a long list scannable instead of turning the panel into a wall
- * of text, and costs almost no extra height (each row is a single line).
- */
-export interface SkillGroup {
-  label: string;
-  items: string[];
 }
 
 /**
@@ -27,20 +15,15 @@ export interface SkillGroup {
  * visitors asking what the two characters were supposed to mean. One strong
  * identity is clearer and far lighter.
  *
- * `skills` is plain data, so adding or reordering entries never requires a
- * component change. Keep each group short enough to fit on one or two lines.
+ * `skill` is a plain string so it can be edited without touching any component.
+ * Keep it to roughly 8-10 entries; beyond that it wraps to three lines and the
+ * panel starts to look crowded.
  */
 export const fighter: FighterCharacter = {
-  id: "architect",
   name: "DUTA",
-  subname: "ARCHITECT",
   fightingStyle: "Creative 3D & Full-Stack Development",
   nationality: "Indonesia",
   height: "180 cm",
-  skills: [
-    { label: "Frontend", items: ["Vue", "React", "JavaScript", "TypeScript", "SCSS"] },
-    { label: "Backend", items: ["Laravel", "PHP"] },
-    { label: "3D & Motion", items: ["Three.js", "GSAP", "WebGL"] },
-  ],
+  skill: "Vue · React · JavaScript · TypeScript · Laravel · PHP · Three.js · GSAP · WebGL",
   specialty: "Interactive WebGL & Scalable Architecture",
 };
