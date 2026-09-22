@@ -1,39 +1,44 @@
 <script setup lang="ts">
-import { activeFighter } from "../store/characterSelect";
+import { fighter } from "../store/fighter";
 </script>
 
 <template>
   <div class="tekken-profile">
     <!-- Fighter Name Header -->
     <div class="fighter-header">
-      <h1 class="fighter-name">{{ activeFighter.name }}</h1>
+      <h1 class="fighter-name">{{ fighter.name }}</h1>
     </div>
 
     <!-- Stats Attributes Stack -->
     <div class="tekken-attributes">
       <div class="attr-item">
-        <div class="attr-badge" :class="{ 'attr-badge-blue': activeFighter.id === 'striker' }">Fighting Style</div>
-        <div class="attr-value">{{ activeFighter.fightingStyle }}</div>
+        <div class="attr-badge">Fighting Style</div>
+        <div class="attr-value">{{ fighter.fightingStyle }}</div>
       </div>
 
       <div class="attr-item">
-        <div class="attr-badge" :class="{ 'attr-badge-blue': activeFighter.id === 'striker' }">Nationality</div>
-        <div class="attr-value">{{ activeFighter.nationality }}</div>
+        <div class="attr-badge">Nationality</div>
+        <div class="attr-value">{{ fighter.nationality }}</div>
       </div>
 
       <div class="attr-item">
-        <div class="attr-badge" :class="{ 'attr-badge-blue': activeFighter.id === 'striker' }">Height</div>
-        <div class="attr-value">{{ activeFighter.height }}</div>
+        <div class="attr-badge">Height</div>
+        <div class="attr-value">{{ fighter.height }}</div>
       </div>
 
       <div class="attr-item">
-        <div class="attr-badge" :class="{ 'attr-badge-blue': activeFighter.id === 'striker' }">Weight</div>
-        <div class="attr-value">{{ activeFighter.weight }}</div>
+        <div class="attr-badge">Skill</div>
+        <div class="skill-groups">
+          <div v-for="group in fighter.skills" :key="group.label" class="skill-group">
+            <span class="skill-group-label">{{ group.label }}</span>
+            <span class="skill-group-items">{{ group.items.join(" · ") }}</span>
+          </div>
+        </div>
       </div>
 
       <div class="attr-item">
-        <div class="attr-badge" :class="{ 'attr-badge-blue': activeFighter.id === 'striker' }">Specialty</div>
-        <div class="attr-value">{{ activeFighter.specialty }}</div>
+        <div class="attr-badge">Specialty</div>
+        <div class="attr-value">{{ fighter.specialty }}</div>
       </div>
     </div>
   </div>
@@ -151,12 +156,6 @@ import { activeFighter } from "../store/characterSelect";
   letter-spacing: 0.6px;
   box-shadow: 0 2px 6px rgba(255, 0, 85, 0.4);
   line-height: 1.3;
-  transition: all 0.3s ease;
-
-  &-blue {
-    background: #0077ff;
-    box-shadow: 0 2px 8px rgba(0, 119, 255, 0.6);
-  }
 }
 
 /* Crisp White Value */
@@ -173,5 +172,39 @@ import { activeFighter } from "../store/characterSelect";
   @include mixins.mq("md") {
     font-size: 16px;
   }
+}
+
+/* Grouped skills: one compact line per category */
+.skill-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 1px;
+}
+
+.skill-group {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+}
+
+.skill-group-label {
+  flex: 0 0 auto;
+  min-width: 78px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.skill-group-items {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  text-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.9),
+    0 1px 2px rgba(0, 0, 0, 1);
 }
 </style>
