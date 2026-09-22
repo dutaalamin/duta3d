@@ -1,4 +1,3 @@
-import thumbnail from "../../../assets/thumbnails/rubic.png";
 import type { ProjectContent } from "../../types";
 
 export default {
@@ -10,12 +9,10 @@ export default {
   description: "An interactive 3D Rubik's Cube game built with Three.js, featuring smooth cube rotations, intuitive manipulation controls, and responsive spatial puzzle mechanics.",
   components: [
     {
-      type: "media",
+      type: "embed",
       props: {
-        type: "image",
-        src: thumbnail,
-        alt: "Rubic Preview",
-        caption: "Live View",
+        src: "https://rubicduta.vercel.app/",
+        title: "Rubic — interactive 3D Rubik's Cube",
       },
     },
   ],
