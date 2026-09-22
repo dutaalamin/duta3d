@@ -8,6 +8,13 @@ export const usePreloader = () => {
   const resourcesProgress = ref(0);
 
   onMounted(() => {
+    // Loading can already have finished before this component mounts, in which
+    // case no further `progress` event arrives and the preloader would never hide.
+    if (resources.isReady) {
+      resourcesProgress.value = 1;
+      return;
+    }
+
     resources.on("progress", (newProgress) => {
       resourcesProgress.value = newProgress;
     });

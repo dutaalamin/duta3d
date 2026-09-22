@@ -22,11 +22,9 @@ const contactGroup = new Group();
 
 // Mixers and actions
 let aboutMixer: AnimationMixer | null = null;
-let aboutCurrentAction: any = null;
 let aboutMeshRef: Group | null = null;
 
 let contactMixer: AnimationMixer | null = null;
-let contactCurrentAction: any = null;
 let contactMeshRef: Group | null = null;
 
 const init = () => {
@@ -46,6 +44,10 @@ const init = () => {
   contactGroup.add(contactAmbientLight);
   contactGroup.add(contactDirLight);
 
+  // The characters are deferred sources: they may still be in flight when the
+  // scene starts, and each one is built as soon as it arrives.
+  resources.on("source-ready", onSourceReady);
+
   initAboutCharacter();
   initContactCharacter();
 
@@ -58,14 +60,20 @@ const init = () => {
   gsap.ticker.add(tick);
 };
 
+const onSourceReady = (name: string) => {
+  if (name === "about-character") initAboutCharacter();
+  else if (name === "contact-character") initContactCharacter();
+};
+
 // 1. About Character: Idle
 const initAboutCharacter = () => {
-  const fbx = resources.items["about-character"];
-  if (!fbx) {
-    console.warn("[Kenney] about-character (Idle) FBX not loaded yet");
-    return;
-  }
+  if (aboutMeshRef) return;
 
+  const fbx = resources.items["about-character"];
+  if (!(fbx instanceof Group)) return;
+
+  // `SkeletonUtils.clone` is declared as returning plain `Object3D`, but an FBX
+  // asset is always a `Group` and the transforms below go through it.
   const aboutMesh = cloneSkeleton(fbx) as Group;
   aboutMesh.renderOrder = 26;
 
@@ -99,24 +107,26 @@ const initAboutCharacter = () => {
   aboutMixer = new AnimationMixer(aboutMesh);
 
   // Play Idle animation
-  if (fbx.animations && fbx.animations.length > 0) {
-    const idleClip = fbx.animations[0];
-    aboutCurrentAction = aboutMixer.clipAction(idleClip);
-    aboutCurrentAction.loop = LoopRepeat;
-    aboutCurrentAction.play();
+  const idleClip = fbx.animations[0];
+  if (idleClip) {
+    const idleAction = aboutMixer.clipAction(idleClip);
+    idleAction.loop = LoopRepeat;
+    idleAction.play();
   }
 
   aboutGroup.add(aboutMesh);
+  updateTransforms();
 };
 
 // 2. Contact Character: Fighting Idle
 const initContactCharacter = () => {
-  const fbx = resources.items["contact-character"];
-  if (!fbx) {
-    console.warn("[Kenney] contact-character (Fighting Idle) FBX not loaded yet");
-    return;
-  }
+  if (contactMeshRef) return;
 
+  const fbx = resources.items["contact-character"];
+  if (!(fbx instanceof Group)) return;
+
+  // `SkeletonUtils.clone` is declared as returning plain `Object3D`, but an FBX
+  // asset is always a `Group` and the transforms below go through it.
   const contactMesh = cloneSkeleton(fbx) as Group;
   contactMesh.renderOrder = 25;
 
@@ -142,14 +152,15 @@ const initContactCharacter = () => {
   contactMixer = new AnimationMixer(contactMesh);
 
   // Play Fighting Idle animation
-  if (fbx.animations && fbx.animations.length > 0) {
-    const fightClip = fbx.animations[0];
-    contactCurrentAction = contactMixer.clipAction(fightClip);
-    contactCurrentAction.loop = LoopRepeat;
-    contactCurrentAction.play();
+  const fightClip = fbx.animations[0];
+  if (fightClip) {
+    const fightAction = contactMixer.clipAction(fightClip);
+    fightAction.loop = LoopRepeat;
+    fightAction.play();
   }
 
   contactGroup.add(contactMesh);
+  updateTransforms();
 };
 
 const updateTransforms = () => {
@@ -218,6 +229,7 @@ const tick = (_time: number, deltaTime: number) => {
 
 const destroy = () => {
   gsap.ticker.remove(tick);
+  resources.off("source-ready", onSourceReady);
 
   if (aboutMixer) aboutMixer.stopAllAction();
   if (contactMixer) contactMixer.stopAllAction();

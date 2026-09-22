@@ -6,20 +6,21 @@ import { threeSizes } from "./utils/sizes";
 import { resources } from "../utils/resources";
 import { raycast } from "./utils/raycast";
 
-let canvas: HTMLCanvasElement | null = null;
-
 const init = (_canvas: HTMLCanvasElement) => {
-  canvas = _canvas;
-
-  resources.once("ready", () => {
+  const setup = () => {
     threeSizes.init(_canvas);
     camera.init();
     renderTarget.init();
-    renderer.init(canvas);
+    renderer.init(_canvas);
 
     objects.init();
     raycast.init();
-  });
+  };
+
+  // `ready` can already have fired before the canvas mounts, so `once` alone
+  // would leave the scene permanently uninitialised.
+  if (resources.isReady) setup();
+  else resources.once("ready", setup);
 };
 
 const destroy = () => {
@@ -28,7 +29,6 @@ const destroy = () => {
   renderer.destroy();
   objects.destroy();
   camera.destroy();
-  canvas = null;
 };
 
 export const three = { init, destroy };

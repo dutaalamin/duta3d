@@ -5,6 +5,12 @@ export type Source = {
   name: string;
   type: "gltfModel" | "texture" | "fbxModel";
   path: string;
+  /**
+   * Loaded only after everything that gates the first render is in, so it never
+   * competes with it for bandwidth. The 3D characters are ~6 MB each and nothing
+   * on screen needs them until the About/Contact sections are reached.
+   */
+  deferred?: boolean;
 };
 
 export const sources: Source[] = [
@@ -16,8 +22,6 @@ export const sources: Source[] = [
   //
   // Note: the name -> file pairing below is intentionally kept as-is (it is swapped
   // relative to the file names); do not "fix" it without verifying the visuals.
-  { name: "about-character", type: "fbxModel", path: contactCharacterModel },
-  { name: "contact-character", type: "fbxModel", path: aboutModel },
+  { name: "about-character", type: "fbxModel", path: contactCharacterModel, deferred: true },
+  { name: "contact-character", type: "fbxModel", path: aboutModel, deferred: true },
 ];
-
-
