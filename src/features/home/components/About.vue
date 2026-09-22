@@ -61,7 +61,6 @@ watchEffect((onInvalidate) => {
 .about-sheet-panel {
   pointer-events: auto;
   padding-left: clamp(24px, 6vw, 90px);
-  margin-top: -20px;
   z-index: 15;
 }
 </style>
