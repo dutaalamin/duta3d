@@ -2,13 +2,11 @@ export interface FighterCharacter {
   id: "architect";
   name: string;
   subname: string;
-  rank: string;
   fightingStyle: string;
   nationality: string;
   height: string;
   skills: SkillGroup[];
   specialty: string;
-  avatarPreview: string;
 }
 
 /**
@@ -36,7 +34,6 @@ export const fighter: FighterCharacter = {
   id: "architect",
   name: "DUTA",
   subname: "ARCHITECT",
-  rank: "2nd dan",
   fightingStyle: "Creative 3D & Full-Stack Development",
   nationality: "Indonesia",
   height: "180 cm",
@@ -46,5 +43,4 @@ export const fighter: FighterCharacter = {
     { label: "3D & Motion", items: ["Three.js", "GSAP", "WebGL"] },
   ],
   specialty: "Interactive WebGL & Scalable Architecture",
-  avatarPreview: "/images/card_architect.png?v=3d",
 };

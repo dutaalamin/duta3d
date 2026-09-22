@@ -12,9 +12,11 @@
   transition: opacity 0.3s ease-in-out;
   opacity: 1;
 
+  /* The DUTA wordmark is 300x90; the mask in index.html fills bottom-up. */
   &-svg {
-    width: 120px;
-    height: 120px;
+    width: min(440px, 68vw);
+    height: auto;
+    filter: drop-shadow(0 0 22px rgba(255, 0, 85, 0.5));
     transition:
       transform 0.2s var(--ease-power2-in),
       opacity 0.2s var(--ease-power2-in);
@@ -23,10 +25,6 @@
   &-rect {
     transform-origin: bottom center;
     transition: transform 0.3s ease-in-out;
-  }
-
-  &-path {
-    fill: var(--color-text-400);
   }
 
   &-hidden {

@@ -78,58 +78,6 @@ import { fighter } from "../store/fighter";
     0 0 30px rgba(255, 255, 255, 0.2);
 }
 
-.fighter-subname {
-  font-size: clamp(16px, 2vw, 24px);
-  font-weight: 800;
-  font-style: italic;
-  letter-spacing: 3px;
-  color: rgba(255, 255, 255, 0.6);
-  text-transform: uppercase;
-  transition: color 0.2s ease;
-}
-
-/* Metallic Rank Badge */
-.rank-container {
-  margin-bottom: 20px;
-}
-
-.tekken-rank-plate {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 3px 14px;
-  background: linear-gradient(180deg, #ffffff 0%, #d8d8d8 30%, #8a8a8a 52%, #b5b5b5 70%, #f0f0f0 100%);
-  border: 1.5px solid #ffffff;
-  border-radius: 2px;
-  box-shadow: 
-    0 4px 12px rgba(0, 0, 0, 0.8),
-    inset 0 1px 1px rgba(255, 255, 255, 0.9),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.5);
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 1px;
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    border-radius: 1px;
-    pointer-events: none;
-  }
-}
-
-.rank-engraving {
-  font-size: 15px;
-  font-weight: 900;
-  font-style: italic;
-  color: #121212;
-  letter-spacing: 0.5px;
-  text-shadow: 
-    0 1px 0 rgba(255, 255, 255, 0.8),
-    0 -1px 0 rgba(0, 0, 0, 0.2);
-  display: inline-block;
-}
-
 /* Attributes Stack (Tekken 8 Style) */
 .tekken-attributes {
   display: flex;
