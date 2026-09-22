@@ -24,6 +24,6 @@ export const fighter: FighterCharacter = {
   fightingStyle: "Creative 3D & Full-Stack Development",
   nationality: "Indonesia",
   height: "180 cm",
-  skill: "Vue · React · JavaScript · TypeScript · Laravel · PHP · Three.js · GSAP · WebGL",
+  skill: "Vue, React, TypeScript, Laravel, Three.js",
   specialty: "Interactive WebGL & Scalable Architecture",
 };
