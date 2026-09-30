@@ -4,7 +4,6 @@ import { isTransitioning } from "../../../composables/useProjectTransition";
 import { ref, watch } from "vue";
 import { projectModules } from "../../../content/projects";
 import ProjectContent from "./ProjectContent.vue";
-import Footer from "../../../components/Footer.vue";
 import { locale } from "../../../i18n/store";
 import { lenis } from "../../../composables/useScroll";
 
@@ -62,7 +61,6 @@ watch(
         :content="content"
         :projectId="recentProjectId"
       />
-      <Footer :class="['project-footer', `project-${recentProjectId}`]"></Footer>
     </div>
   </div>
 </template>

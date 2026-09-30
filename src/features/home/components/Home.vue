@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import Layout from "../../../components/Layout.vue";
 import About from "./About.vue";
+import Hero from "./Hero.vue";
 //import AboutSections from "../features/about/Sections.vue";
 import Projects from "./Projects.vue";
 import Contact from "./Contact.vue";
-import Footer from "../../../components/Footer.vue";
 import { ref, onMounted, onUnmounted, watchEffect, computed, watch } from "vue";
 import { three } from "../../../three";
 import { animations } from "../../../animations";
@@ -138,23 +138,26 @@ watch(
     ]"
   >
     <Layout>
-      <div class="intro-wrapper" ref="introRef" id="about">
+      <div class="intro-wrapper" ref="introRef">
         <div
           class="intro-sticky"
           :class="{ 'intro-sticky-visible': isStickyVisible }"
           :style="{ '--contact-bottom': `${contactBottom}px` }"
         >
           <canvas :class="['three-canvas', { 'three-canvas-contact': !isStickyVisible }]" ref="threeCanvasRef"></canvas>
+          <div id="home">
+            <Hero />
+          </div>
           <div class="intro-about-container" :class="{ 'intro-about-hidden': !isStickyVisible }">
             <About :spacer-ref="introRef" />
           </div>
         </div>
       </div>
+      <div id="about"></div>
       <Projects id="projects" @loaded="handleProjectsLoaded" />
       <div ref="contactRef" class="home-contact">
         <Contact id="contact" v-if="projectsLoaded" />
       </div>
-      <Footer :withSocial="false"></Footer>
     </Layout>
   </div>
   <HeaderHome v-if="projectsLoaded" />

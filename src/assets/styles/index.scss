@@ -60,3 +60,17 @@ html {
     pointer-events: none;
   }
 }
+
+/* ---------- Reveal saat masuk layar ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.reveal-tampil {
+  opacity: 1;
+  transform: none;
+}

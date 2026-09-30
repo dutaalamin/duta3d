@@ -1,8 +1,8 @@
 import thumbnailQuran from "../../../assets/thumbnails/dquran.png";
 import thumbnailWave from "../../../assets/thumbnails/wave.png";
 import thumbnailRubic from "../../../assets/thumbnails/rubic.png";
-import thumbnailBravo from "../../../assets/thumbnails/bravo.png";
-import thumbnailDraken from "../../../assets/thumbnails/draken.png";
+import thumbnailPokedex from "../../../assets/thumbnails/pokedex.png";
+import thumbnailKora from "../../../assets/thumbnails/kora.png";
 import thumbnailPacman from "../../../assets/thumbnails/pacman.png";
 
 import type { ProjectPreview } from "../../types";
@@ -27,16 +27,16 @@ export default [
     description: "Interactive 3D Rubik's Game",
   },
   {
-    title: "Bravo",
-    slug: "bravo",
-    thumbnail: thumbnailBravo,
-    description: "AI-powered marketing platform",
+    title: "Pokedex",
+    slug: "pokedex",
+    thumbnail: thumbnailPokedex,
+    description: "Playable Pokemon catching game",
   },
   {
-    title: "Draken",
-    slug: "draken",
-    thumbnail: thumbnailDraken,
-    description: "Software and tools service platform",
+    title: "Kora",
+    slug: "kora",
+    thumbnail: thumbnailKora,
+    description: "AI chat assistant with voice",
   },
   {
     title: "Pacman",
