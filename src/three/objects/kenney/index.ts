@@ -184,14 +184,25 @@ const updateTransforms = () => {
 };
 
 /**
- * Home dan About berbagi panggung 3D yang sama. Home memakai karakter
- * contact (animasi idle) supaya terasa tenang sebagai layar pembuka,
- * sementara About memakai karakter about (animasi fighting idle).
- * Contact tetap memakai karakter contact, hanya berbeda posisi & skala.
+ * Home dan About berbagi satu panggung 3D setinggi dua layar.
+ *  - Layar pertama  : Home, memakai karakter contact (animasi idle).
+ *  - Layar kedua    : About, memakai karakter about (fighting idle).
+ * Setelah panggung itu habis (Projects dan seterusnya) karakter disembunyikan,
+ * kecuali di bagian Contact yang punya karakter sendiri.
  */
 const isHomeZone = () => {
   if (typeof window === "undefined") return false;
   return window.scrollY < window.innerHeight * 0.5;
+};
+
+/** Apakah pembaca sudah melewati panggung Home + About (masuk Projects)? */
+const sudahLewatIntro = () => {
+  if (typeof window === "undefined") return false;
+  const stage = document.querySelector<HTMLElement>(".intro-wrapper");
+  if (!stage) return false;
+  const rect = stage.getBoundingClientRect();
+  // Panggung selesai saat bagian bawahnya sudah melewati atas layar.
+  return rect.bottom <= 0;
 };
 
 const updateModelVisibility = () => {
@@ -205,8 +216,9 @@ const updateModelVisibility = () => {
   rootGroup.visible = true;
 
   const isContact = sceneWeights.contact > 0.001;
-  const isHome = !isContact && isHomeZone();
-  const isAbout = !isContact && !isHome;
+  const lewatIntro = sudahLewatIntro();
+  const isHome = !isContact && !lewatIntro && isHomeZone();
+  const isAbout = !isContact && !lewatIntro && !isHome;
 
   // ABOUT: karakter about (fighting idle)
   aboutGroup.visible = isAbout;
