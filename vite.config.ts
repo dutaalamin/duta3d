@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import glsl from "vite-plugin-glsl";
+import { fileURLToPath } from "node:url";
 
 export default defineConfig({
   plugins: [
@@ -23,7 +24,13 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "/src/assets/styles/mixins.scss";`,
+        // Sass 1.93 no longer resolves the old absolute "/src/..." form. It
+        // failed silently, producing empty CSS: no colour variables, no fonts,
+        // so every heading rendered black-on-black. `loadPaths` resolves the
+        // styles folder once, and the bare `mixins` import keeps the default
+        // `mixins.mq(...)` namespace working in every component style block.
+        loadPaths: [fileURLToPath(new URL("./src/assets/styles", import.meta.url))],
+        additionalData: `@use "mixins";`,
       },
     },
   },

@@ -11,19 +11,42 @@ const ke = (id: string) => {
 };
 
 onMounted(() => {
-  const el = heroRef.value;
-  if (!el) return;
+  const hero = heroRef.value;
+  const wrapper = document.querySelector<HTMLElement>(".intro-wrapper");
+  const panel = document.querySelector<HTMLElement>(".intro-about-container");
+  if (!hero || !wrapper) return;
 
-  // Hero memudar saat halaman mulai digulir ke bawah
+  // Dua layar berbagi satu panggung 3D: layar pertama sapaan (HOME), layar
+  // kedua profil karakter (ABOUT). Keduanya bergantian lewat opacity supaya
+  // tidak pernah terlihat bersamaan, lalu memudar sebelum Projects masuk.
+  //
+  // ScrollTrigger memetakan seluruh scroll (0..1) ke durasi total timeline,
+  // jadi timeline ini sengaja dibuat tepat 1 detik: kalau lebih, bagian akhir
+  // tidak pernah tercapai dan About tetap terlihat menumpuk Projects.
   tl = gsap.timeline({
     scrollTrigger: {
-      trigger: "#about",
+      trigger: wrapper,
       start: "top top",
-      end: "35% top",
+      end: "bottom top",
       scrub: true,
     },
+    defaults: { ease: "none" },
   });
-  tl.to(el, { opacity: 0, y: -50, ease: "none" }, 0);
+
+  // 0.00 - 0.22  HOME memudar
+  tl.to(hero, { opacity: 0, y: -50, duration: 0.22 });
+
+  if (panel) {
+    gsap.set(panel, { opacity: 0 });
+    // 0.22 - 0.48  ABOUT muncul menggantikan HOME
+    tl.to(panel, { opacity: 1, duration: 0.26 });
+    // 0.48 - 0.70  jeda supaya ABOUT terbaca
+    tl.to({}, { duration: 0.22 });
+    // 0.70 - 1.00  ABOUT memudar sebelum Projects masuk
+    tl.to(panel, { opacity: 0, duration: 0.3 });
+  } else {
+    tl.to({}, { duration: 0.78 });
+  }
 });
 
 onUnmounted(() => {

@@ -138,6 +138,8 @@ watch(
     ]"
   >
     <Layout>
+      <!-- HOME + ABOUT berbagi satu panggung 3D: layar pertama menampilkan
+           sapaan, layar kedua menampilkan profil karakter. -->
       <div class="intro-wrapper" ref="introRef">
         <div
           class="intro-sticky"
@@ -145,15 +147,21 @@ watch(
           :style="{ '--contact-bottom': `${contactBottom}px` }"
         >
           <canvas :class="['three-canvas', { 'three-canvas-contact': !isStickyVisible }]" ref="threeCanvasRef"></canvas>
-          <div id="home">
+
+          <div class="intro-hero-layer">
             <Hero />
           </div>
-          <div class="intro-about-container" :class="{ 'intro-about-hidden': !isStickyVisible }">
+
+          <div class="intro-about-container">
             <About :spacer-ref="introRef" />
           </div>
         </div>
+
+        <!-- Penanda posisi untuk navigasi -->
+        <span class="anchor anchor-home" id="home" aria-hidden="true"></span>
+        <span class="anchor anchor-about" id="about" aria-hidden="true"></span>
       </div>
-      <div id="about"></div>
+
       <Projects id="projects" @loaded="handleProjectsLoaded" />
       <div ref="contactRef" class="home-contact">
         <Contact id="contact" v-if="projectsLoaded" />
@@ -232,6 +240,9 @@ watch(
   width: 100%;
   display: flex;
   flex-direction: column;
+  /* Dua layar: HOME lalu ABOUT, keduanya memakai panggung 3D yang sama. */
+  min-height: calc(var(--lvh) * 200);
+  position: relative;
 
   &-spacer {
     display: none;
@@ -242,6 +253,31 @@ watch(
       height: 200px;
     }
   }
+}
+
+/* Penanda posisi untuk tautan navigasi */
+.anchor {
+  display: block;
+  width: 100%;
+  height: calc(var(--lvh) * 100);
+  pointer-events: none;
+
+  &-home {
+    position: absolute;
+    top: 0;
+  }
+
+  &-about {
+    position: absolute;
+    top: calc(var(--lvh) * 100);
+  }
+}
+
+.intro-hero-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 12;
 }
 
 .intro-hero {
