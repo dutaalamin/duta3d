@@ -146,7 +146,7 @@ watch(
           :class="{ 'intro-sticky-visible': isStickyVisible }"
           :style="{ '--contact-bottom': `${contactBottom}px` }"
         >
-          <canvas :class="['three-canvas', { 'three-canvas-contact': !isStickyVisible }]" ref="threeCanvasRef"></canvas>
+          <canvas class="three-canvas" ref="threeCanvasRef"></canvas>
 
           <div class="intro-hero-layer">
             <Hero />
@@ -173,21 +173,16 @@ watch(
 
 <style scoped lang="scss">
 .three-canvas {
+  /* Kanvas 3D menempel di layar (bukan mengikuti bagian intro), supaya
+     karakter tetap terlihat di semua bagian: Home, About, dan Contact. */
+  position: fixed;
+  inset: 0;
   width: calc(var(--svw) * 100);
   height: calc(var(--lvh) * 100);
   max-height: calc(var(--lvh) * 100);
-  position: relative;
   overflow: hidden;
   pointer-events: none;
-
-  &-contact {
-    position: absolute;
-    bottom: var(--contact-bottom);
-    left: 0;
-    width: 100%;
-    height: calc(var(--lvh) * 100);
-    max-height: calc(var(--lvh) * 100);
-  }
+  z-index: 1;
 }
 
 .home {

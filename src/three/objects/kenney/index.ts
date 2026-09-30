@@ -12,7 +12,7 @@ import { clone as cloneSkeleton } from "three/examples/jsm/utils/SkeletonUtils.j
 import { scene } from "../../core/scene";
 import gsap from "gsap";
 import { ref } from "vue";
-import { sceneWeights, sceneWeightsInOut } from "../../../animations/scenes";
+import { sceneWeights } from "../../../animations/scenes";
 
 export const isKenneyActive = ref(true);
 
@@ -183,27 +183,52 @@ const updateTransforms = () => {
   }
 };
 
+/**
+ * Home dan About berbagi panggung 3D yang sama. Home memakai karakter
+ * contact (animasi idle) supaya terasa tenang sebagai layar pembuka,
+ * sementara About memakai karakter about (animasi fighting idle).
+ * Contact tetap memakai karakter contact, hanya berbeda posisi & skala.
+ */
+const isHomeZone = () => {
+  if (typeof window === "undefined") return false;
+  return window.scrollY < window.innerHeight * 0.5;
+};
+
 const updateModelVisibility = () => {
   if (!isKenneyActive.value) {
     rootGroup.visible = false;
     aboutGroup.visible = false;
+    contactGroup.visible = false;
     return;
   }
 
   rootGroup.visible = true;
 
-  // ABOUT: Visible directly at top of page until user reaches Contact section
-  const isAbout = sceneWeights.contact < 0.2 && sceneWeightsInOut.about.out < 0.9;
-  aboutGroup.visible = isAbout;
+  const isContact = sceneWeights.contact > 0.001;
+  const isHome = !isContact && isHomeZone();
+  const isAbout = !isContact && !isHome;
 
-  if (isAbout) {
-    if (aboutMeshRef && aboutMeshRef.visible) {
-      const aboutScale = 0.0205;
-      aboutMeshRef.scale.set(aboutScale, aboutScale, aboutScale);
-    }
+  // ABOUT: karakter about (fighting idle)
+  aboutGroup.visible = isAbout;
+  if (isAbout && aboutMeshRef) {
+    const aboutScale = 0.0205;
+    aboutMeshRef.scale.set(aboutScale, aboutScale, aboutScale);
   }
 
-  contactGroup.visible = sceneWeights.contact > 0.001;
+  // HOME + CONTACT: karakter contact (idle), posisi berbeda per bagian
+  contactGroup.visible = isContact || isHome;
+  if (contactMeshRef) {
+    if (isHome) {
+      // Berdiri di panggung yang sama dengan About
+      contactGroup.position.set(0, 0.45, 6);
+      const s = 0.0205;
+      contactMeshRef.scale.set(s, s, s);
+    } else {
+      // Posisi asli bagian Contact
+      contactGroup.position.set(0, -12.6, 0.5);
+      contactMeshRef.scale.set(0.018, 0.018, 0.018);
+    }
+  }
 };
 
 const tick = (_time: number, deltaTime: number) => {
