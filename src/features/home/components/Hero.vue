@@ -16,9 +16,10 @@ onMounted(() => {
   // kedua profil karakter (ABOUT). Keduanya bergantian lewat opacity supaya
   // tidak pernah terlihat bersamaan, lalu memudar sebelum Projects masuk.
   //
-  // ScrollTrigger memetakan seluruh scroll (0..1) ke durasi total timeline,
-  // jadi timeline ini sengaja dibuat tepat 1 detik: kalau lebih, bagian akhir
-  // tidak pernah tercapai dan About tetap terlihat menumpuk Projects.
+  // Panggung lebih pendek dari sebelumnya, dan bagian Projects sengaja berada
+  // di atas panggung intro (z-index lebih tinggi). Jadi About tidak perlu
+  // memudar: cukup biarkan kartu Projects naik dan menutupinya. Dengan begitu
+  // selalu ada isi di layar — tidak pernah muncul area hitam kosong.
   tl = gsap.timeline({
     scrollTrigger: {
       trigger: wrapper,
@@ -29,19 +30,17 @@ onMounted(() => {
     defaults: { ease: "none" },
   });
 
-  // 0.00 - 0.22  HOME memudar
-  tl.to(hero, { opacity: 0, y: -50, duration: 0.22 });
+  // 0.00 - 0.15  HOME memudar
+  tl.to(hero, { opacity: 0, y: -50, duration: 0.15 });
 
   if (panel) {
     gsap.set(panel, { opacity: 0 });
-    // 0.22 - 0.48  ABOUT muncul menggantikan HOME
-    tl.to(panel, { opacity: 1, duration: 0.26 });
-    // 0.48 - 0.70  jeda supaya ABOUT terbaca
-    tl.to({}, { duration: 0.22 });
-    // 0.70 - 1.00  ABOUT memudar sebelum Projects masuk
-    tl.to(panel, { opacity: 0, duration: 0.3 });
+    // 0.10 - 0.35  ABOUT muncul menggantikan HOME, lalu tetap terlihat
+    //              sampai kartu Projects naik menutupinya
+    tl.to(panel, { opacity: 1, duration: 0.25 });
+    tl.to({}, { duration: 0.65 });
   } else {
-    tl.to({}, { duration: 0.78 });
+    tl.to({}, { duration: 0.85 });
   }
 });
 

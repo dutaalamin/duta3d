@@ -2,7 +2,6 @@ export interface FighterCharacter {
   name: string;
   fightingStyle: string;
   nationality: string;
-  height: string;
   skill: string;
   specialty: string;
 }
@@ -23,7 +22,6 @@ export const fighter: FighterCharacter = {
   name: "DUTA",
   fightingStyle: "Creative 3D & Full-Stack Development",
   nationality: "Indonesia",
-  height: "180 cm",
   skill: "Vue, React, TypeScript, Laravel, Three.js",
   specialty: "Interactive WebGL & Scalable Architecture",
 };

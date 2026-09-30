@@ -185,24 +185,29 @@ const updateTransforms = () => {
 
 /**
  * Home dan About berbagi satu panggung 3D setinggi dua layar.
- *  - Layar pertama  : Home, memakai karakter contact (animasi idle).
- *  - Layar kedua    : About, memakai karakter about (fighting idle).
- * Setelah panggung itu habis (Projects dan seterusnya) karakter disembunyikan,
- * kecuali di bagian Contact yang punya karakter sendiri.
+ *  - Layar pertama : Home, memakai karakter contact (animasi idle).
+ *  - Layar kedua   : About, memakai karakter about (fighting idle).
+ *
+ * Panggung tingginya 2 layar, dan panel About mulai memudar pada ~85% panggung.
+ * Karakter ikut disembunyikan pada titik itu, supaya tidak pernah terlihat
+ * menumpuk di atas bagian Projects yang mulai masuk dari bawah.
  */
 const isHomeZone = () => {
   if (typeof window === "undefined") return false;
-  return window.scrollY < window.innerHeight * 0.5;
+  return window.scrollY < window.innerHeight * 0.25;
 };
 
-/** Apakah pembaca sudah melewati panggung Home + About (masuk Projects)? */
+/**
+ * Karakter baru disembunyikan setelah bagian Projects naik menutupi penuh
+ * layar. Selama panggung intro bergulir, karakter tetap terlihat sehingga
+ * tidak pernah ada area kosong; kartu Projects yang naik perlahan menutupinya.
+ */
 const sudahLewatIntro = () => {
   if (typeof window === "undefined") return false;
-  const stage = document.querySelector<HTMLElement>(".intro-wrapper");
-  if (!stage) return false;
-  const rect = stage.getBoundingClientRect();
-  // Panggung selesai saat bagian bawahnya sudah melewati atas layar.
-  return rect.bottom <= 0;
+  const proyek = document.getElementById("projects");
+  if (!proyek) return false;
+  // Projects sudah menutupi seluruh layar.
+  return proyek.getBoundingClientRect().top <= 0;
 };
 
 const updateModelVisibility = () => {

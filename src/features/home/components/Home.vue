@@ -5,7 +5,7 @@ import Hero from "./Hero.vue";
 //import AboutSections from "../features/about/Sections.vue";
 import Projects from "./Projects.vue";
 import Contact from "./Contact.vue";
-import { ref, onMounted, onUnmounted, watchEffect, computed, watch } from "vue";
+import { ref, onMounted, onUnmounted, watchEffect, watch } from "vue";
 import { three } from "../../../three";
 import { animations } from "../../../animations";
 import HeaderHome from "../../../components/HeaderHome.vue";
@@ -31,10 +31,6 @@ const { isTouch } = useAgent();
 const handleIntersection = (entries: IntersectionObserverEntry[]) => {
   scrolledPastIntro.value = entries[0]?.isIntersecting ?? true;
 };
-
-const isStickyVisible = computed(() => {
-  return scrolledPastIntro.value || !projectsLoaded.value;
-});
 
 const updateContactBottomOffset = () => {
   if (!contactRef.value) return;
@@ -143,16 +139,15 @@ watch(
       <div class="intro-wrapper" ref="introRef">
         <div
           class="intro-sticky"
-          :class="{ 'intro-sticky-visible': isStickyVisible }"
           :style="{ '--contact-bottom': `${contactBottom}px` }"
         >
           <canvas class="three-canvas" ref="threeCanvasRef"></canvas>
 
-          <div class="intro-hero-layer">
+          <div class="intro-hero-layer" :class="{ 'intro-layer-hidden': !scrolledPastIntro }">
             <Hero />
           </div>
 
-          <div class="intro-about-container">
+          <div class="intro-about-container" :class="{ 'intro-layer-hidden': !scrolledPastIntro }">
             <About :spacer-ref="introRef" />
           </div>
         </div>
@@ -235,8 +230,10 @@ watch(
   width: 100%;
   display: flex;
   flex-direction: column;
-  /* Dua layar: HOME lalu ABOUT, keduanya memakai panggung 3D yang sama. */
-  min-height: calc(var(--lvh) * 200);
+  /* Dua layar berbagi satu panggung: HOME lalu ABOUT bergantian di tempat yang
+     sama (cross-fade), jadi tidak perlu scroll sepanjang dua layar penuh.
+     170vh cukup untuk cross-fade + jeda baca + fade menuju Projects. */
+  min-height: calc(var(--lvh) * 170);
   position: relative;
 
   &-spacer {
@@ -300,6 +297,12 @@ watch(
 }
 
 .intro-sticky {
+  /* Konten intro (Home/About) dipatok ke viewport selama panggung bergulir.
+     Kalau memakai `sticky`, elemen otomatis terlepas di tengah panggung dan
+     ikut naik ke atas — itu yang menyisakan layar hitam kosong di atas
+     Projects. Dengan `fixed`, konten tetap di tempat dan kartu Projects yang
+     naik dari bawah menutupinya secara alami. */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -310,10 +313,14 @@ watch(
   display: flex;
   align-items: flex-end;
   pointer-events: none;
+}
 
-  &-visible {
-    position: sticky;
-  }
+/* Layer teks intro disembunyikan saat panggung sudah lewat, supaya tidak ikut
+   menutupi Projects/Contact. Kanvas 3D sengaja dibiarkan hidup karena karakter
+   masih dipakai di bagian Contact. */
+.intro-layer-hidden {
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .intro-sticky-content {

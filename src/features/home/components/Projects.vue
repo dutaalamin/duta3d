@@ -54,6 +54,10 @@ onMounted(loadPreviews);
   align-items: center;
   justify-content: center;
   position: relative;
+  /* Berada di atas panggung intro yang di-fixed (z-index rendah), supaya saat
+     kartu Projects naik dari bawah ia menutupi kanvas 3D dan teks intro —
+     termasuk judul "Selected Projects" yang tadinya tertutup kanvas. */
+  z-index: 5;
   width: 100%;
   gap: var(--space-xl);
   padding-left: var(--space-outer);

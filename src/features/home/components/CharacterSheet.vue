@@ -22,11 +22,6 @@ import { fighter } from "../store/fighter";
       </div>
 
       <div class="attr-item">
-        <div class="attr-badge">Height</div>
-        <div class="attr-value">{{ fighter.height }}</div>
-      </div>
-
-      <div class="attr-item">
         <div class="attr-badge">Skill</div>
         <div class="attr-value">{{ fighter.skill }}</div>
       </div>
