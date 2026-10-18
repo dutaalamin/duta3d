@@ -1,4 +1,3 @@
-import thumbnail from "../../../assets/thumbnails/sharkie.webp";
 import type { ProjectContent } from "../../types";
 
 export default {
@@ -8,15 +7,15 @@ export default {
   videoBorder: false,
   live: "https://sharkie-clean.vercel.app/",
   description:
-    "A 2D side-scrolling underwater adventure built with vanilla JavaScript and the Canvas API. Guide a shark through a parallax ocean, collect coins, dodge jellyfish and pufferfish, and fight a boss at the end of the level. No framework, no engine — just game loops, sprite animation and collision handling written from scratch.",
+    "A 2D side-scrolling underwater adventure playable right here. Guide a shark through a parallax ocean, collect coins, dodge jellyfish and pufferfish, and fight a boss at the end of the level. Built with vanilla JavaScript and the Canvas API — no framework, no game engine, just a game loop, sprite animation and collision handling written from scratch. Use the arrow keys or WASD to swim, Space to jump, X to shoot bubbles and Y for a fin slap.",
   components: [
     {
-      type: "media",
+      type: "embed",
       props: {
-        type: "image",
-        src: thumbnail,
-        alt: "Sharkie gameplay",
-        caption: "Live Gameplay",
+        src: "https://sharkie-clean.vercel.app/",
+        title: "Sharkie — swim, collect coins and defeat the boss",
+        caption: "Play it right here",
+        ratio: "16 / 9",
       },
     },
     {

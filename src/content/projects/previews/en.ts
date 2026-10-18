@@ -8,6 +8,12 @@ import thumbnailPacman from "../../../assets/thumbnails/pacman.png";
 import type { ProjectPreview } from "../../types";
 
 export default [  {
+    title: "Sharkie",
+    slug: "sharkie",
+    thumbnail: thumbnailSharkie,
+    description: "Playable 2D underwater adventure game",
+  },
+  {
     title: "Pokedex",
     slug: "pokedex",
     thumbnail: thumbnailPokedex,
@@ -18,12 +24,6 @@ export default [  {
     slug: "pacman",
     thumbnail: thumbnailPacman,
     description: "Classic 2D Arcade Maze Game",
-  },
-  {
-    title: "Sharkie",
-    slug: "sharkie",
-    thumbnail: thumbnailSharkie,
-    description: "Playable 2D underwater adventure game",
   },
   {
     title: "Quran",
