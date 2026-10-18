@@ -5,14 +5,14 @@ export default {
   theme: "dark",
   tags: ["javascript", "canvas", "gsap"],
   videoBorder: false,
-  live: "https://sharkie-clean.vercel.app/",
+  live: "https://sharkie.duta1.com/",
   description:
     "A 2D side-scrolling underwater adventure playable right here. Guide a shark through a parallax ocean, collect coins, dodge jellyfish and pufferfish, and fight a boss at the end of the level. Built with vanilla JavaScript and the Canvas API — no framework, no game engine, just a game loop, sprite animation and collision handling written from scratch. Use the arrow keys or WASD to swim, Space to jump, X to shoot bubbles and Y for a fin slap.",
   components: [
     {
       type: "embed",
       props: {
-        src: "https://sharkie-clean.vercel.app/",
+        src: "https://sharkie.duta1.com/",
         title: "Sharkie — swim, collect coins and defeat the boss",
         caption: "Play it right here",
         ratio: "16 / 9",
