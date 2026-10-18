@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import Banner from "../../../components/Banner.vue";
+</script>
+
 <template>
   <div class="hero">
     <div class="hero-inner">
@@ -5,6 +9,8 @@
         <span class="hero-title-line">Duta</span>
         <span class="hero-title-line">Alamin</span>
       </h1>
+
+      <Banner class="hero-banner" copy="Software Engineer" size="sm" animated />
     </div>
   </div>
 </template>
@@ -23,6 +29,14 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+/* Badge hangs off the bottom-right of the name, tilted like a sticker. */
+.hero-banner {
+  display: block;
+  margin-top: 6px;
+  margin-left: clamp(120px, 22vw, 260px);
+  transform: rotate(-2.5deg);
 }
 
 .hero-title {
