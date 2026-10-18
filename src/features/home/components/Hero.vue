@@ -22,7 +22,9 @@ import Banner from "../../../components/Banner.vue";
   min-height: calc(var(--lvh) * 100);
   display: flex;
   align-items: center;
-  padding: 0 clamp(24px, 6vw, 90px);
+  /* Same left inset as the Contact heading (grid column 2 + section padding),
+     so the two titles share one vertical line down the page. */
+  padding: 0 clamp(24px, 6vw, 90px) 0 clamp(60px, 9.8vw, 140px);
 }
 
 .hero-inner {

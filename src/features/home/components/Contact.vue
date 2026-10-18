@@ -23,9 +23,6 @@ import Banner from "../../../components/Banner.vue";
   overflow: hidden;
   min-height: calc(var(--lvh) * 100);
   padding: var(--space-outer);
-  /* Matches the hero's horizontal padding so both headings share one left
-     edge; the grid alone would start at the section padding. */
-  padding-left: clamp(24px, 6vw, 90px);
   /* Clears the fixed header so the title never sits under the logo. */
   padding-top: calc(var(--height-header) + var(--space-xl));
   position: relative;
@@ -48,10 +45,8 @@ import Banner from "../../../components/Banner.vue";
       padding-top: var(--space-lg);
     }
 
-    /* Column 1 on every breakpoint: the hero title uses the same left edge,
-       so the two headings line up down the page. */
     @include mixins.mq("lg") {
-      grid-column: 1 / 6;
+      grid-column: 2 / 6;
     }
   }
 
