@@ -6,7 +6,7 @@ export default {
   theme: "dark",
   tags: ["javascript", "canvas", "gsap"],
   videoBorder: false,
-  live: "https://sharkie.duta1.com/",
+  live: "https://sharkie-clean.vercel.app/",
   description:
     "A 2D side-scrolling underwater adventure built with vanilla JavaScript and the Canvas API. Guide a shark through a parallax ocean, collect coins, dodge jellyfish and pufferfish, and fight a boss at the end of the level. No framework, no engine — just game loops, sprite animation and collision handling written from scratch.",
   components: [
