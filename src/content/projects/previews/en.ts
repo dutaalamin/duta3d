@@ -7,30 +7,11 @@ import thumbnailPacman from "../../../assets/thumbnails/pacman.png";
 
 import type { ProjectPreview } from "../../types";
 
-export default [
-  {
-    title: "Quran",
-    slug: "quran",
-    thumbnail: thumbnailQuran,
-    description: "Al-Quran Digital Platform",
-  },
-  {
-    title: "Wave",
-    slug: "wave",
-    thumbnail: thumbnailWave,
-    description: "Architecture & Design Firm",
-  },
-  {
+export default [  {
     title: "Pokedex",
     slug: "pokedex",
     thumbnail: thumbnailPokedex,
     description: "Playable Pokemon catching game",
-  },
-  {
-    title: "Kora",
-    slug: "kora",
-    thumbnail: thumbnailKora,
-    description: "AI chat assistant with voice",
   },
   {
     title: "Pacman",
@@ -43,5 +24,23 @@ export default [
     slug: "sharkie",
     thumbnail: thumbnailSharkie,
     description: "Playable 2D underwater adventure game",
+  },
+  {
+    title: "Quran",
+    slug: "quran",
+    thumbnail: thumbnailQuran,
+    description: "Al-Quran Digital Platform",
+  },
+  {
+    title: "Kora",
+    slug: "kora",
+    thumbnail: thumbnailKora,
+    description: "AI chat assistant with voice",
+  },
+  {
+    title: "Wave",
+    slug: "wave",
+    thumbnail: thumbnailWave,
+    description: "Architecture & Design Firm",
   },
 ] as const satisfies ProjectPreview[];
