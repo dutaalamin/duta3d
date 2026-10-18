@@ -1,4 +1,4 @@
-import thumbnail from "../../../assets/thumbnails/kora.png";
+import thumbnail from "../../../assets/thumbnails/kora.webp";
 import type { ProjectContent } from "../../types";
 
 export default {

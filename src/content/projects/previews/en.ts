@@ -2,7 +2,7 @@ import thumbnailQuran from "../../../assets/thumbnails/dquran.png";
 import thumbnailSharkie from "../../../assets/thumbnails/sharkie.webp";
 import thumbnailWave from "../../../assets/thumbnails/wave.png";
 import thumbnailPokedex from "../../../assets/thumbnails/pokedex.png";
-import thumbnailKora from "../../../assets/thumbnails/kora.png";
+import thumbnailKora from "../../../assets/thumbnails/kora.webp";
 import thumbnailPacman from "../../../assets/thumbnails/pacman.png";
 
 import type { ProjectPreview } from "../../types";
@@ -35,7 +35,7 @@ export default [  {
     title: "Kora",
     slug: "kora",
     thumbnail: thumbnailKora,
-    description: "AI chat assistant with voice",
+    description: "Korean language AI assistant",
   },
   {
     title: "Wave",
