@@ -6,7 +6,7 @@ export default {
   theme: "dark",
   tags: ["react", "next"],
   videoBorder: false,
-  live: "https://wavewave.vercel.app/",
+  live: "https://wave.duta1.com/",
   description: "A sleek, modern portfolio website for an architectural and interior design firm, showcasing luxury residential concepts, spatial planning, and clean aesthetic structures.",
   components: [
     {

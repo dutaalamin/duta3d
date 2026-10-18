@@ -6,7 +6,7 @@ export default {
   theme: "dark",
   tags: ["react", "node"],
   videoBorder: false,
-  live: "https://dquran.vercel.app/",
+  live: "https://quran.duta1.com/",
   description: "A comprehensive digital Al-Quran web platform designed to deliver a serene, accessible reading and study experience. Features include complete Surah indexing, ayah-by-ayah translations, customizable Arabic typography, audio recitations, and a distraction-free interface optimized across all screen sizes.",
   components: [
     {
