@@ -75,9 +75,9 @@ watchEffect((onInvalidate) => {
 
   &-background {
     position: absolute;
-    outline: var(--stroke-lg) solid rgba(74, 217, 255, 0.4);
+    /* Solid fill only: the old outline + glow read as a bordered box, which is
+       not the flat sticker look we want. */
     background-color: var(--color-orange-400);
-    box-shadow: 0 0 16px rgba(74, 217, 255, 0.4);
     top: 0;
     left: 0;
     width: 100%;
