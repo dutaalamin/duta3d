@@ -47,14 +47,14 @@ const classes = computed(() => [
     background-color: var(--color-accent-400, var(--color-orange-400));
     color: var(--color-accent-text-400, var(--color-white-400));
     --icon-color: var(--color-accent-text-400, var(--color-white-400));
-    box-shadow: 0 4px 15px rgba(255, 0, 85, 0.4);
+    box-shadow: 0 4px 15px rgba(74, 217, 255, 0.4);
 
     @include mixins.hover {
       &:hover {
-        background-color: #d60046;
+        background-color: var(--color-orange-500);
         color: var(--color-white-400);
         --icon-color: var(--color-white-400);
-        box-shadow: 0 4px 20px rgba(255, 0, 85, 0.6);
+        box-shadow: 0 4px 20px rgba(74, 217, 255, 0.6);
       }
     }
   }

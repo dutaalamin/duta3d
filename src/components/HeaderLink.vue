@@ -37,8 +37,8 @@ const props = defineProps<{
     position: absolute;
     inset: 0;
     transition: opacity 0.15s ease-in-out;
-    background-color: #ff0055;
-    box-shadow: 0 0 16px rgba(255, 0, 85, 0.7);
+    background-color: var(--color-orange-400);
+    box-shadow: 0 0 16px rgba(74, 217, 255, 0.7);
     border-radius: 100px;
     z-index: -1;
     opacity: 0;
@@ -46,8 +46,8 @@ const props = defineProps<{
 
   &-dark {
     &::after {
-      background-color: #ff0055;
-      box-shadow: 0 0 16px rgba(255, 0, 85, 0.7);
+      background-color: var(--color-orange-400);
+      box-shadow: 0 0 16px rgba(74, 217, 255, 0.7);
     }
   }
 

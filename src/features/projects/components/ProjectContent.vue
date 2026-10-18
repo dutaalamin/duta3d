@@ -102,7 +102,9 @@ onMounted(loadPreviews);
 
   &-components {
     padding: 20px var(--space-outer);
-    background-color: var(--color-background-400);
+    /* Semi-transparent panel so the ocean reads through behind the media. */
+    background-color: rgba(6, 22, 36, 0.55);
+    backdrop-filter: blur(4px);
     width: 100%;
     display: flex;
     flex-direction: column;

@@ -1,27 +1,21 @@
-import contactCharacterModel from "./assets/models/contact-character.fbx";
-import aboutModel from "./assets/models/about-character.fbx";
+/**
+ * Sources loaded before the page is revealed.
+ *
+ * The 3D character models that used to live here are gone: the site no longer
+ * renders a WebGL scene, so nothing is left to preload. The array is kept (and
+ * stays empty) so `Resources` and the preloader keep working unchanged, and so
+ * future textures can be added without touching the loading pipeline.
+ */
 
 export type Source = {
   name: string;
-  type: "gltfModel" | "texture" | "fbxModel";
+  type: "gltfModel" | "texture";
   path: string;
   /**
    * Loaded only after everything that gates the first render is in, so it never
-   * competes with it for bandwidth. The 3D characters are ~6 MB each and nothing
-   * on screen needs them until the About/Contact sections are reached.
+   * competes with it for bandwidth.
    */
   deferred?: boolean;
 };
 
-export const sources: Source[] = [
-  // 3D characters actually rendered on the site.
-  //
-  // The "hero-character" asset (~6 MB) was removed: the hero model is permanently
-  // disabled in `three/objects/kenney` (`heroGroup.visible = false`), so loading it
-  // only wasted bandwidth on every page load. Git history retains it if needed.
-  //
-  // Note: the name -> file pairing below is intentionally kept as-is (it is swapped
-  // relative to the file names); do not "fix" it without verifying the visuals.
-  { name: "about-character", type: "fbxModel", path: contactCharacterModel, deferred: true },
-  { name: "contact-character", type: "fbxModel", path: aboutModel, deferred: true },
-];
+export const sources: Source[] = [];

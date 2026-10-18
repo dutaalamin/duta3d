@@ -1,6 +1,6 @@
 import thumbnailQuran from "../../../assets/thumbnails/dquran.png";
+import thumbnailSharkie from "../../../assets/thumbnails/sharkie.webp";
 import thumbnailWave from "../../../assets/thumbnails/wave.png";
-import thumbnailRubic from "../../../assets/thumbnails/rubic.png";
 import thumbnailPokedex from "../../../assets/thumbnails/pokedex.png";
 import thumbnailKora from "../../../assets/thumbnails/kora.png";
 import thumbnailPacman from "../../../assets/thumbnails/pacman.png";
@@ -21,12 +21,6 @@ export default [
     description: "Architecture & Design Firm",
   },
   {
-    title: "Rubic",
-    slug: "rubic",
-    thumbnail: thumbnailRubic,
-    description: "Interactive 3D Rubik's Game",
-  },
-  {
     title: "Pokedex",
     slug: "pokedex",
     thumbnail: thumbnailPokedex,
@@ -43,5 +37,11 @@ export default [
     slug: "pacman",
     thumbnail: thumbnailPacman,
     description: "Classic 2D Arcade Maze Game",
+  },
+  {
+    title: "Sharkie",
+    slug: "sharkie",
+    thumbnail: thumbnailSharkie,
+    description: "Playable 2D underwater adventure game",
   },
 ] as const satisfies ProjectPreview[];

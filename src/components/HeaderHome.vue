@@ -12,11 +12,10 @@ const handleLinkClick = (link: string) => {
   lenis.value.scrollTo(link);
 };
 
-type ActiveLink = "about" | "projects" | "contact";
-const activeLink = ref<ActiveLink | null>("about");
-const sections: ActiveLink[] = ["about", "projects", "contact"];
+type ActiveLink = "projects" | "contact";
+const activeLink = ref<ActiveLink | null>(null);
+const sections: ActiveLink[] = ["projects", "contact"];
 const ariaLabels = {
-  about: t("about"),
   projects: t("projects"),
   contact: t("contact"),
 };
@@ -40,7 +39,7 @@ onMounted(() => {
   sections.forEach((section) => {
     ScrollTrigger.create({
       trigger: `#${section}`,
-      start: section === "about" ? "top 22.5%" : "top center",
+      start: "top center",
       end: "bottom center",
       onEnter: () => {
         activeLink.value = section;
@@ -143,8 +142,8 @@ onMounted(() => {
     left: 3px;
     height: calc(100% - 6px);
     width: 128px;
-    background: #ff0055;
-    box-shadow: 0 0 16px rgba(255, 0, 85, 0.7);
+    background: var(--color-orange-400);
+    box-shadow: 0 0 16px rgba(74, 217, 255, 0.7);
     border-radius: 100px;
     transition:
       transform 0.3s var(--ease-smooth),
@@ -153,7 +152,7 @@ onMounted(() => {
     opacity: 0;
 
     &-dark {
-      background: #ff0055;
+      background: var(--color-orange-400);
     }
 
     &-active {

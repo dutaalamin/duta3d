@@ -1,19 +1,22 @@
-import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import { SRGBColorSpace, TextureLoader } from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import EventEmitter from "./EventEmitter";
 import { sources } from "../sources";
 
 import type { Source } from "../sources";
-import type { Group, Texture } from "three";
-import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
+import type { Texture } from "three";
 
 const isProd = import.meta.env.PROD;
 
 /** Everything a `Source` can resolve to, keyed by its `name` in `items`. */
-export type LoadedResource = Texture | GLTF | Group;
+export type LoadedResource = Texture;
 
+/**
+ * Asset preloader.
+ *
+ * The GLTF/Draco/FOX pipeline is gone along with the WebGL scene: the site is
+ * plain HTML now, so only textures can be queued here. The class is kept so the
+ * preloader still gates the first paint if a source is ever added back.
+ */
 class Resources extends EventEmitter<{
   ready: void;
   progress: number;
@@ -28,20 +31,14 @@ class Resources extends EventEmitter<{
   private started = false;
 
   loaders: {
-    gltfLoader: GLTFLoader;
     textureLoader: TextureLoader;
-    fontLoader: FontLoader;
-    fbxLoader: FBXLoader;
   };
 
   constructor() {
     super();
 
     this.loaders = {
-      gltfLoader: new GLTFLoader(),
       textureLoader: new TextureLoader(),
-      fontLoader: new FontLoader(),
-      fbxLoader: new FBXLoader(),
     };
   }
 
@@ -95,34 +92,7 @@ class Resources extends EventEmitter<{
       done();
     };
 
-    if (source.type === "gltfModel") {
-      this.loaders.gltfLoader.load(
-        source.path,
-        (file) => {
-          this.sourceLoaded(source, file);
-          done();
-        },
-        undefined,
-        fail
-      );
-    } else if (source.type === "fbxModel") {
-      this.loaders.fbxLoader.load(
-        source.path,
-        (file) => {
-          this.sourceLoaded(source, file);
-          done();
-        },
-        (xhr) => {
-          if (xhr.lengthComputable) {
-            const percent = Math.round((xhr.loaded / xhr.total) * 100);
-            if (percent % 25 === 0) {
-              this.log(`Loading FBX ${source.name}: ${percent}%`);
-            }
-          }
-        },
-        fail
-      );
-    } else if (source.type === "texture") {
+    if (source.type === "texture") {
       this.loaders.textureLoader.load(
         source.path,
         (file: Texture) => {
@@ -131,7 +101,7 @@ class Resources extends EventEmitter<{
           done();
         },
         undefined,
-        fail
+        fail,
       );
     }
   }
@@ -148,4 +118,7 @@ class Resources extends EventEmitter<{
 }
 
 export const resources = new Resources();
+
+// Kick off immediately: nothing on the page waits for a WebGL context any more,
+// and `sources` is currently empty so this resolves on the next tick.
 resources.startLoading();

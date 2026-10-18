@@ -1,39 +1,44 @@
 :root {
-  --color-text-400: #f4f4f6;
-  --color-text-300: #a1a1aa;
-  --color-text-200: #71717a;
+  --color-text-400: #eaf6ff;
+  --color-text-300: #9fc0d8;
+  --color-text-200: #6f8fa8;
 
-  --color-grayscale-500: #1c1a20;
-  --color-grayscale-400: #2c2832;
+  --color-grayscale-500: #12324c;
+  --color-grayscale-400: #1b4666;
 
-  --color-beige-700: #2a2530;
-  --color-beige-600: #1c1822;
-  --color-beige-500: #131118;
-  --color-beige-400: #0b0b0e;
+  --color-beige-700: #0e2c45;
+  --color-beige-600: #0a2136;
+  --color-beige-500: #071827;
+  --color-beige-400: #05121e;
 
-  --color-background-400: #0b0b0e;
+  --color-background-400: #05121e;
+  --color-background-300: #081c2d;
 
-  --color-black-400: #060608;
+  /* Default accent for project pages that do not define their own theme. */
+  --color-accent-400: #4ad9ff;
+  --color-accent-text-400: #05121e;
 
-  --color-gray-500: #71717a;
-  --color-gray-400: #a1a1aa;
+  --color-black-400: #030b13;
 
-  /* Tekken Crimson Red Accent (Matching About badges) */
-  --color-orange-400: #ff0055;
-  --color-orange-500: #d60046;
+  --color-gray-500: #6f8fa8;
+  --color-gray-400: #9fc0d8;
+
+  /* Ocean accent — replaces the old Tekken crimson. */
+  --color-orange-400: #4ad9ff;
+  --color-orange-500: #21b8e0;
 
   --color-white-400: #ffffff;
 
-  --color-cyan-500: #ff0055;
-  --color-cyan-400: #ff2a6d;
+  --color-cyan-500: #4ad9ff;
+  --color-cyan-400: #7ce8ff;
 
-  --color-text-cyan-400: #ffe4ec;
-  --color-text-cyan-300: #ff8da7;
+  --color-text-cyan-400: #e6faff;
+  --color-text-cyan-300: #a8e9ff;
 
-  --color-dark-blue-600: #1c1822;
-  --color-dark-blue-500: #131118;
-  --color-dark-blue-400: #0b0b0e;
+  --color-dark-blue-600: #0a2136;
+  --color-dark-blue-500: #071827;
+  --color-dark-blue-400: #05121e;
 
-  --color-hologram-top: rgba(255, 0, 85, 0.4);
-  --color-hologram-bottom: rgba(255, 0, 85, 0.1);
+  --color-hologram-top: rgba(74, 217, 255, 0.4);
+  --color-hologram-bottom: rgba(74, 217, 255, 0.1);
 }

@@ -1,26 +1,16 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
-import { transitions } from "../../../animations";
 import { t } from "../../../i18n/utils/translate";
 import Social from "../../../components/Social.vue";
-
-const contactElement = ref<HTMLElement | null>(null);
-
-onMounted(() => {
-  if (contactElement.value) {
-    transitions.contact.setup(contactElement.value);
-  }
-});
-
-onUnmounted(() => {
-  transitions.contact.destroy();
-});
+import Banner from "../../../components/Banner.vue";
 </script>
 
 <template>
-  <div class="contact grid" ref="contactElement">
+  <div class="contact grid" id="contact">
     <div class="contact-content">
-      <h2 class="contact-title" v-html="t('lets-work-together')"></h2>
+      <div class="contact-heading">
+        <Banner class="contact-banner" copy="Contact" size="sm" animated />
+        <h2 class="contact-title" v-html="t('lets-work-together')"></h2>
+      </div>
       <Social variant="background" />
     </div>
   </div>
@@ -33,15 +23,13 @@ onUnmounted(() => {
   overflow: hidden;
   min-height: calc(var(--lvh) * 100);
   padding: var(--space-outer);
-  padding-top: var(--space-lg);
-
-  @include mixins.mq("md") {
-    padding-top: var(--space-xxl);
-  }
+  /* Clears the fixed header so the title never sits under the logo. */
+  padding-top: calc(var(--height-header) + var(--space-xl));
+  position: relative;
+  z-index: 10;
 
   &-content {
     position: relative;
-    padding-top: var(--space-md);
     grid-column: 1 / 13;
     display: flex;
     flex-direction: column;
@@ -52,7 +40,7 @@ onUnmounted(() => {
     }
 
     @include mixins.mq("md") {
-      gap: var(--space-xl);
+      gap: var(--space-lg);
       grid-column: 1 / 6;
       padding-top: var(--space-lg);
     }
@@ -62,10 +50,32 @@ onUnmounted(() => {
     }
   }
 
+  /* Same treatment as the SELECTED badge on Projects: pinned to the top-left
+     corner of the heading, tilted. */
+  &-heading {
+    position: relative;
+    /* Tight enough that the badge sits just above the first line. */
+    padding-top: var(--space-md);
+  }
+
+  &-banner {
+    position: absolute;
+    top: 0;
+    left: -8px;
+    transform: translate(0, -55%) rotate(-4deg);
+
+    @include mixins.mq("lg") {
+      left: -16px;
+      transform: translate(0, -55%) rotate(-6deg);
+    }
+  }
+
   &-title {
+    margin: 0;
     font-weight: 900;
     letter-spacing: 0.02em;
     font-size: var(--font-size-title-md);
+    color: #ffffff;
 
     @include mixins.mq("sm") {
       font-size: var(--font-size-title-lg);

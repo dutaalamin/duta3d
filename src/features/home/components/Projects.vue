@@ -54,18 +54,23 @@ onMounted(loadPreviews);
   align-items: center;
   justify-content: center;
   position: relative;
-  /* Berada di atas panggung intro yang di-fixed (z-index rendah), supaya saat
-     kartu Projects naik dari bawah ia menutupi kanvas 3D dan teks intro —
-     termasuk judul "Selected Projects" yang tadinya tertutup kanvas. */
+  /* Above the fixed ocean layer and the intro stage. */
   z-index: 5;
   width: 100%;
   gap: var(--space-xl);
   padding-left: var(--space-outer);
   padding-right: var(--space-outer);
-  background-color: var(--color-beige-400);
-  min-height: calc(var(--lvh) * 100 + var(--radius-xxl));
-  padding-top: 96px;
+  background-color: transparent;
+  isolation: isolate;
+  padding-top: calc(var(--height-header) + 40px);
   padding-bottom: 96px;
+
+  /* The ocean is one fixed layer behind the whole page; content just needs to
+     sit above it. */
+  > .grid {
+    position: relative;
+    z-index: 2;
+  }
 
   @include mixins.mq("md") {
     padding-top: 144px;

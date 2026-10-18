@@ -75,9 +75,9 @@ watchEffect((onInvalidate) => {
 
   &-background {
     position: absolute;
-    outline: var(--stroke-lg) solid rgba(255, 0, 85, 0.4);
-    background-color: #ff0055;
-    box-shadow: 0 0 16px rgba(255, 0, 85, 0.4);
+    outline: var(--stroke-lg) solid rgba(74, 217, 255, 0.4);
+    background-color: var(--color-orange-400);
+    box-shadow: 0 0 16px rgba(74, 217, 255, 0.4);
     top: 0;
     left: 0;
     width: 100%;
@@ -105,7 +105,9 @@ watchEffect((onInvalidate) => {
 
   &-copy {
     font-weight: 700;
-    color: var(--color-white-400);
+    /* Dark text on the cyan fill: white on #4ad9ff is only ~1.9:1 contrast,
+       which fails WCAG and washes out over bright water. Dark is ~11:1. */
+    color: var(--color-accent-text-400);
     font-family: "ProFontWindows";
     text-transform: uppercase;
 

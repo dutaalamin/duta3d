@@ -29,7 +29,10 @@ import { projectId, recentProjectId } from "../../../composables/useRouteObserve
   left: 0;
   height: calc(100% + var(--radius-xxl));
   width: 100%;
-  background-color: var(--color-background-300);
+  /* Translucent tint instead of an opaque fill: the ocean stays visible, the
+     project gets a slightly deeper surface to read text on. */
+  background-color: rgba(8, 28, 45, 0.82);
+  backdrop-filter: blur(6px);
   z-index: calc(var(--z-index-project-background) - 3);
   pointer-events: none;
   transition: transform var(--transition-route-duration) var(--transition-route-ease);

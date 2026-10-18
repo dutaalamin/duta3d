@@ -4,7 +4,6 @@ import { lerp } from "../utils/math";
 import gsap from "gsap";
 import ArrowRightLong from "./icons/ArrowRightLong.vue";
 import { path } from "../composables/useRouteObserver";
-import { raycast } from "../three/utils/raycast";
 import { projectId } from "../composables/useRouteObserver";
 
 const cursorWrapperRef = ref<HTMLElement | null>(null);
@@ -24,16 +23,7 @@ const tick = () => {
   currentX.value = lerp(currentX.value, mouseX.value, lerpSpeed);
   currentY.value = lerp(currentY.value, mouseY.value, lerpSpeed);
 
-  const hoveringBox = raycast.getHoveringBox();
-
-  if (hoveringBox) {
-    if (!isVisible.value) {
-      isVisible.value = true;
-      currentX.value = mouseX.value;
-      currentY.value = mouseY.value;
-    }
-    cursorType.value = "circle-black";
-  } else if (detectedType.value) {
+  if (detectedType.value) {
     if (!isVisible.value) {
       isVisible.value = true;
       currentX.value = mouseX.value;

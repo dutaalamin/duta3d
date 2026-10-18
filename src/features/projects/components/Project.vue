@@ -68,7 +68,8 @@ watch(
 <style scoped lang="scss">
 .project {
   min-height: calc(var(--lvh) * 100);
-  background-color: var(--color-background-300);
+  /* Transparent so the single fixed ocean layer shows through the whole site. */
+  background-color: transparent;
   max-width: calc(var(--lvw) * 100);
   overflow: hidden;
 

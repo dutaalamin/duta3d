@@ -10,7 +10,7 @@ Live: [duta1.com](https://duta1.com)
 | ---- | ---------- |
 | Framework | Vue 3 (`<script setup>`) + TypeScript |
 | Build | Vite 6 |
-| 3D | three.js (FBX characters, custom render targets) |
+| 3D | three.js (Draco-compressed GLB characters, custom render targets) |
 | Motion | GSAP + Lenis (smooth scroll) |
 | Audio | Howler |
 | Styling | SCSS (shared mixins in `src/assets/styles/`) |
@@ -32,6 +32,7 @@ npm run dev                # http://localhost:3000
 | `npm run build` | `vue-tsc` typecheck, then production bundle to `dist/` |
 | `npm run preview` | Serve the production build locally |
 | `npm run typecheck` | Typecheck only (`vue-tsc -b`) |
+| `npm run models:optimize` | Re-run Blender compression for the 3D characters (needs Blender) |
 | `npm run env:copy-example` | Copy `.env.example` → `.env` (skips if present) |
 | `npm run env:remove` | Delete `.env` |
 
@@ -55,10 +56,10 @@ src/
 
 ## Content
 
-- **Projects** — `src/content/projects/{en}/<slug>.ts` holds copy, tags, media and links. Slugs must match `projectIds` in `src/content/projects/index.ts`. Current roster: `quran`, `wave`, `rubic`, `bravo`, `draken`, `pacman`.
+- **Projects** — `src/content/projects/{en}/<slug>.ts` holds copy, tags, media and links. Slugs must match `projectIds` in `src/content/projects/index.ts`. Current roster: `atlas`, `quran`, `wave`, `pokedex`, `kora`, `pacman`, `job-market-analyzer`.
 - **Previews** — `src/content/projects/previews/` for listing cards.
 - **Tags** — variants and labels live in `src/components/tagVariants.ts` (used by `Tag.vue` and the content types).
-- **Characters** — the 3D roster is defined in `src/features/home/store/characterSelect.ts`; character setups and the fighter switch live in `src/three/objects/kenney/index.ts`.
+- **Characters** — the single About character is defined in `src/features/home/store/fighter.ts`; character setup and visibility live in `src/three/objects/kenney/index.ts`. The source `.glb` files are built from the FBX originals by `scripts/optimize-models.py` (Blender: Draco + WebP); run `npm run models:optimize` to regenerate them.
 - **i18n** — only `en` is currently registered (`src/i18n/constants/index.ts`). Adding a locale means a new folder under `src/content/projects/` and a matching namespace in `src/i18n/messages/namespaces/`.
 
 ## Environment
@@ -83,3 +84,10 @@ Original portfolio:
 -> https://david-hckh.com
 
 Commercial reuse or redistribution of substantial portions of this project without permission is prohibited.
+
+### Third-party assets
+
+The underwater scenery and fish sprites in `src/assets/sharkie/` come from
+[sharkie-game](https://github.com/davidhckh/sharkie-game) by David Heckhoff,
+used as the backdrop of the Projects section. Only the landscape layers and
+three creature sprites are bundled; no game logic is reused.

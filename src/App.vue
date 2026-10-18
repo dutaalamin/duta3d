@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Header from "./components/Header.vue";
 import { useTranslations } from "./i18n/composables/useTranslations";
-import { usePreloader } from "./composables/usePreloader";
 import { useMusic } from "./features/sounds/composables/useMusic";
 import { useHowler } from "./features/sounds/composables/useHowler";
 import { useRouteObserver } from "./composables/useRouteObserver";
@@ -11,11 +10,11 @@ import { useProjectTransition } from "./composables/useProjectTransition";
 import { useScroll } from "./composables/useScroll";
 import { projectVisible } from "./composables/useRouteObserver";
 import ProjectBackground from "./features/projects/components/ProjectBackground.vue";
+import OceanBackground from "./features/home/components/OceanBackground.vue";
 
 const { isTransitioning } = useProjectTransition();
 
 useTranslations();
-usePreloader();
 useMusic();
 useHowler();
 useScroll();
@@ -23,6 +22,13 @@ useRouteObserver();
 </script>
 
 <template>
+  <!--
+    One ocean for the entire site: the home page and the project overlay both
+    scroll on top of it, so opening a project never swaps to a different-looking
+    page. It is fixed and sits behind everything.
+  -->
+  <OceanBackground />
+
   <Header />
 
   <!-- main page -->
